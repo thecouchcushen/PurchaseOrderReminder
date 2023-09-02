@@ -8,9 +8,9 @@ const SupplierLine = (propObject) => {
     return (
         <Tr>
             <Td>{supplierToDisplay.name}</Td>
-            <Td>{supplierToDisplay.deposit}</Td>
-            <Td>{supplierToDisplay.balance}</Td>
-            <Td>{supplierToDisplay.daysafterpickup}</Td>
+            <Td>{supplierToDisplay.deposit*100}%</Td>
+            <Td>{supplierToDisplay.balance*100}%</Td>
+            <Td>{supplierToDisplay.daysafterpickup} days</Td>
         </Tr>
     )
 }

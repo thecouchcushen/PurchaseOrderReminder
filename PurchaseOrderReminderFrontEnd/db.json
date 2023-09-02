@@ -63,5 +63,40 @@
             "balance": 1.0,
             "daysafterpickup": 30
         }
+    ],
+    "skus": [
+        {
+            "id": 1,
+            "sku": "323-2-3P",
+            "name": "Envelope for Recycling without Deco",
+            "unit": "ea",
+            "bom": []
+        },
+        {
+            "id": 2,
+            "sku": "323-2-3",
+            "name": "Assembled Recycling Envelope",
+            "unit": "ea",
+            "bom": [
+                {
+                    "sku": "323-2-3P",
+                    "quantity": 1
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "sku": "323-63450",
+            "name": "E27 Liquid Collagen - Mango",
+            "unit": "ea",
+            "bom": []
+        },
+        {
+            "id": 4,
+            "sku": "323-4-61",
+            "name": "L30 Biotin Gummies Product Cards",
+            "unit": "ea",
+            "bom": []
+        }
     ]
 }

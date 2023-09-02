@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import SupplierLine from "./SupplierLine"
+import SkuLine from "./SkuLine"
 import axios from 'axios'
 import { 
     Table,
@@ -12,15 +12,15 @@ import {
     Text
   } from '@chakra-ui/react'
 
-const SupplierList = () => {
-    const [suppliers, setSuppliers] = useState([])
+const SkuCatalog = () => {
+    const [skus, setSkus] = useState([])
 
     useEffect(() => {
         axios
-        .get('http://localhost:3001/suppliers')
+        .get('http://localhost:3001/skus')
         .then(response => {
           //console.log('promise fulfilled')
-          setSuppliers(response.data)
+          setSkus(response.data)
         })
       }, [])
 
@@ -32,21 +32,21 @@ const SupplierList = () => {
             fontSize='6xl'
             fontWeight='extrabold'
             >
-            Suppliers
+            SKU Catalog
             </Text>
             <TableContainer>
                 <Table>
-                    <TableCaption>Supplier List</TableCaption>
+                    <TableCaption>SKU Catalog</TableCaption>
                     <Thead>
                         <Tr>
-                            <Th>Supplier Name</Th>
-                            <Th>Deposit %</Th>
-                            <Th>Balance %</Th>
-                            <Th>Balance Due __ Days After Pickup</Th>
+                            <Th>SKU</Th>
+                            <Th>Description</Th>
+                            <Th>Unit</Th>
+                            <Th></Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {suppliers.map(supplier => <SupplierLine supplier={supplier} key={'Supplier' + supplier.id} />
+                        {skus.map(sku => <SkuLine sku={sku} key={'Sku' + sku.id} />
                         )}
                     </Tbody>
                 </Table>
@@ -55,4 +55,4 @@ const SupplierList = () => {
       )
 }
 
-export default SupplierList
+export default SkuCatalog
