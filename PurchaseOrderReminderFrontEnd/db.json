@@ -33,5 +33,35 @@
             "currency": "EUR",
             "duedate": "10/15/2023"
         }
+    ],
+    "suppliers": [
+        {
+            "id": 1,
+            "name": "Tosla",
+            "deposit": 0.0,
+            "balance": 1,
+            "daysafterpickup": 30
+        },
+        {
+            "id": 2,
+            "name": "Grounded",
+            "deposit": 0.3,
+            "balance": 0.7,
+            "daysafterpickup": 0
+        },
+        {
+            "id": 3,
+            "name": "Skillful",
+            "deposit": 0.3,
+            "balance": 0.7,
+            "daysafterpickup": 0
+        },
+        {
+            "id": 4,
+            "name": "CCG",
+            "deposit": 0.0,
+            "balance": 1.0,
+            "daysafterpickup": 30
+        }
     ]
 }
