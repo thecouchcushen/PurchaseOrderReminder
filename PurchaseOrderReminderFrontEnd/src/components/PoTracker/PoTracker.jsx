@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { 
     Table,
     Thead,
-    Tbody,
     Tr,
     Th,
     Td,
@@ -14,7 +13,9 @@ import {
     TableCaption,
     TableContainer,
     Center,
-    Text
+    Text,
+    Accordion,
+    
   } from '@chakra-ui/react'
 
 const PoTracker = () => {
@@ -44,6 +45,7 @@ const PoTracker = () => {
       </div>
       <div className="card">
       <Center><h1>PO Line Items</h1></Center>
+      
         <TableContainer>
           <Table>
             <TableCaption>Open Pos</TableCaption>
@@ -65,18 +67,18 @@ const PoTracker = () => {
                 <Td><Input placeholder='Currency Filter'></Input></Td>
               </Tr>
             </Thead>
-            <Tbody>
-              {
-                poLines.map(lineItem => 
-                  <PoLine 
-                    line={lineItem} 
-                    key={"LineNumber" + lineItem.id} 
-                  />
-                )
-              }
-            </Tbody>
           </Table>
         </TableContainer>
+        <Accordion allowMultiple>
+          {
+            poLines.map(lineItem => 
+              <PoLine 
+                line={lineItem} 
+                key={"LineNumber" + lineItem.id} 
+              />
+            )
+          }
+        </Accordion>
       </div>
     </>
     )
