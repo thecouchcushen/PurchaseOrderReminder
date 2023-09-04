@@ -1,57 +1,78 @@
 {
-    "poLineItems": [
+    "pos": [
         {
             "id": 1,
+            "placed": "08/01/2023",
             "ponumber": "PO22000188",
-            "sku": "323-2-3P",
-            "description": "Recycling Envelope Secondary Packaging",
+            "podescription": "Recycling Envelope Secondary Reorder",
             "supplier": "Grounded Packaging",
-            "quantity": 180000,
-            "price": 0.188,
             "currency": "USD",
-            "duedate": "10/15/2023"
+            "lineitems": [
+                {
+                    "sku": "323-2-3P",
+                    "quantity": 180000,
+                    "price": 0.188,
+                    "duedate": "10/15/2023",
+                    "destination": "Geodis",
+                    "shipmethod": "Sea"
+                }
+            ]
         },
         {
             "id": 2,
-            "ponumber": "PO23000098",
-            "sku": "323-4-61",
-            "description": "L30 Biotin Product Cards",
+            "placed": "07/15/2023",
+            "ponumber": "PO23000064",
+            "podescription": "L30 Product Card First Order New Size",
             "supplier": "Skillful Printing",
-            "quantity": 30000,
-            "price": 0.03,
             "currency": "USD",
-            "duedate": "11/01/2023"
+            "lineitems": [
+                {
+                    "sku": "323-4-61",
+                    "quantity": 30000,
+                    "price": 0.03,
+                    "duedate": "11/01/2023",
+                    "destination": "Shipmonk",
+                    "shipmethod": "Air"
+                }
+            ]
         },
         {
             "id": 3,
+            "placed": "08/01/2023",
             "ponumber": "PO23000107",
-            "sku": "323-63450",
-            "description": "E27 Liquid Collagen 450ml - Mango",
+            "podescription": "August Tosla Order - E27 Mango",
             "supplier": "Tosla d.o.o.",
-            "quantity": 600000,
-            "price": 6.1,
             "currency": "EUR",
-            "duedate": "10/15/2023"
+            "lineitems": [
+                {
+                    "sku": "323-63450",
+                    "quantity": 600000,
+                    "price": 6.10,
+                    "duedate": "10/15/2023",
+                    "destination": "Geodis",
+                    "shipmethod": "Sea"
+                }
+            ]
         }
     ],
     "suppliers": [
         {
             "id": 1,
-            "name": "Tosla",
+            "name": "Tosla d.o.o.",
             "deposit": 0.0,
             "balance": 1,
             "daysafterpickup": 30
         },
         {
             "id": 2,
-            "name": "Grounded",
+            "name": "Grounded Packaging",
             "deposit": 0.3,
             "balance": 0.7,
             "daysafterpickup": 0
         },
         {
             "id": 3,
-            "name": "Skillful",
+            "name": "Skillful Printing",
             "deposit": 0.3,
             "balance": 0.7,
             "daysafterpickup": 0

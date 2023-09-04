@@ -1,5 +1,5 @@
 import PoLineItemForm from './PoLineItemForm'
-import PoLineItem from './PoLineItem'
+import PoLine from './PoLine'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
@@ -22,7 +22,7 @@ const PoTracker = () => {
 
     useEffect(() => {
       axios
-      .get('http://localhost:3001/POlineitems')
+      .get('http://localhost:3001/pos')
       .then(response => {
         //console.log('promise fulfilled')
         setPoLines(response.data)
@@ -49,30 +49,26 @@ const PoTracker = () => {
             <TableCaption>Open Pos</TableCaption>
             <Thead>
               <Tr>
+                <Th>Placed</Th>
                 <Th>PO Number</Th>
-                <Th>SKU</Th>
                 <Th>Description</Th>
                 <Th>Supplier</Th>
-                <Th>Quantity</Th>
-                <Th>Price</Th>
+                <Th>Total Cost</Th>
                 <Th>Currency</Th>
-                <Th>Due Date</Th>
               </Tr>
               <Tr>
+                <Td><Input placeholder='Placement Filter'></Input></Td>
                 <Td><Input placeholder='PO Filter'></Input></Td>
-                <Td><Input placeholder='SKU Filter'></Input></Td>
                 <Td><Input placeholder='Description Filter'></Input></Td>
                 <Td><Input placeholder='Supplier Filter'></Input></Td>
-                <Td><Input placeholder='Quantity Filter'></Input></Td>
-                <Td><Input placeholder='Price Filter'></Input></Td>
-                <Td><Input placeholder='Price Filter'></Input></Td>
+                <Td><Input placeholder='Cost Filter'></Input></Td>
                 <Td><Input placeholder='Currency Filter'></Input></Td>
               </Tr>
             </Thead>
             <Tbody>
               {
                 poLines.map(lineItem => 
-                  <PoLineItem 
+                  <PoLine 
                     line={lineItem} 
                     key={"LineNumber" + lineItem.id} 
                   />
