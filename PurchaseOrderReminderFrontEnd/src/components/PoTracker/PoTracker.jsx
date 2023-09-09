@@ -32,7 +32,7 @@ const PoTracker = () => {
       </Text>
       <Button onClick={() => handleFormButton(showForm, formButtonText)}>{formButtonText}</Button>
 
-      {showForm ? ( <PoLineItemForm /> ) : ( <PoTrackerContent /> ) }
+      {showForm ? ( <PoLineItemForm isEditMode={false}/> ) : ( <PoTrackerContent /> ) }
 
       
     </>
