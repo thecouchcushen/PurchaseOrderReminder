@@ -11,7 +11,8 @@ import {
     Table,
     Tbody,
     Thead,
-    Th
+    Th,
+    Button
 } from '@chakra-ui/react'
 
 const PoLine = (propsObject) => {
@@ -41,6 +42,8 @@ const PoLine = (propsObject) => {
                         <Td>{poToDisplay.podescription}</Td>
                         <Td>{poValue}</Td>  
                         <Td>{poToDisplay.currency}</Td>  
+                        <Td><Button>Edit</Button></Td>
+                        
                     </Tr>
                   </Tbody>
                 </Table>

@@ -2,11 +2,27 @@ import {
     Input,
     Button,
     Card,
-    Flex,
-    Select,
     FormControl
   } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
+import SkuLineForm from './SkuLineForm'
+import PropTypes from 'prop-types'
+
+const blankLine = {
+    
+    fgmat: '',
+    finalproduct: '',
+    sku: '',
+    description: '',
+    quantity: 0,
+    price: 0,
+    duedate: '',
+    destination: '',
+    shipmethod: '',
+    arrivaldate: '',
+    status: ''
+    
+}
 
 const initialState = {
     ponumber: '',
@@ -14,18 +30,28 @@ const initialState = {
     supplier: '',
     currency: '',
     description: '',
-    lines: []
+    lines: [
+        blankLine
+    ]
 }
 
 const PoLineItemForm = (props) => {
     const [formData, setFormData] = useState(initialState)
+    const [numberOfSkus, setNumberOfSkus] = useState(1)
+
     const {isEditMode, editedData} = props
+
+    //useEffect(() => {
+    //    console.log(formData)
+    //}, [formData])
 
     useEffect(() => {
         if (isEditMode) {
             setFormData(editedData)
+            setNumberOfSkus(editedData.lines.length)
         } else {
             setFormData(initialState)
+            setNumberOfSkus(initialState.lines.length)
         }
     }, [isEditMode, editedData])
 
@@ -36,6 +62,41 @@ const PoLineItemForm = (props) => {
         [name]: value,
     }))
     }
+
+    const handleAddSkuLine = () => {
+        setNumberOfSkus(numberOfSkus + 1)
+        setFormData((prevData) => ({
+          ...prevData,
+          lines: [...prevData.lines, blankLine],
+        }))
+    }
+
+    const handleSkuLineDelete = (index) => {
+        let skusWithoutDeletedSku = formData.lines
+        skusWithoutDeletedSku.splice(index, 1)
+        setFormData((prevData) => ({
+        ...prevData,
+        lines: skusWithoutDeletedSku,
+    }))
+    }
+
+    const handleSkuLineInputChange = (index, name, value) => {
+        // Create a copy of the lines array with the updated SKU line at the specified index
+        const updatedLines = formData.lines.map((line, i) => {
+          if (i === index) {
+            return {
+              ...line,
+              [name]: value,
+            }
+          }
+          return line;
+        })
+    
+        setFormData((prevData) => ({
+          ...prevData,
+          lines: updatedLines,
+        }))
+      }
 
     const handleSubmit = () => {
     //e.preventDefault()
@@ -56,49 +117,50 @@ const PoLineItemForm = (props) => {
         <Card>
             <FormControl>
                 <Input maxWidth={'50%'} margin={'2'} placeholder='PO' type='text' name='ponumber' value={formData.ponumber} onChange={handleInputChange}/>
+                
+                <Input maxWidth={'50%'} margin={'2'} placeholder='Placed' type='date' name='placed' value={formData.placed} onChange={handleInputChange} />
+                <Input maxWidth={'50%'} margin={'2'} placeholder='Supplier' type='text' name='supplier' value={formData.supplier} onChange={handleInputChange}/>
+                <Input maxWidth={'10%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
+                <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='description' value={formData.description} onChange={handleInputChange}/>
+
+                <Button maxWidth={'30%'} margin={5} onClick={handleAddSkuLine}>Add SKU Line</Button>
+
+                {formData.lines.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} />
+                )}
+                
+                <Button maxWidth={'30%'} margin={5} type='submit' onClick={handleSubmit}>{isEditMode ? "Update" : "Create"}</Button>
             
-            <Input maxWidth={'50%'} margin={'2'} placeholder='Placed' type='date' name='placed' value={formData.placed} onChange={handleInputChange} />
-            <Input maxWidth={'50%'} margin={'2'} placeholder='Supplier' type='text' name='supplier' value={formData.supplier} onChange={handleInputChange}/>
-            <Input maxWidth={'10%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
-            <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='description' value={formData.description} onChange={handleInputChange}/>
-            <Flex>
-                <Select>
-                    <option value='finishedgoods'>Finished Good</option>
-                    <option value='materials'>Materials</option>
-                </Select>
-                <Input placeholder='Final Product SKU' />
-            </Flex>
-            <Flex>
-                <Input placeholder='SKU' />
-                <Input placeholder='Description' />
-                <Input placeholder='Quantity' />
-                <Input placeholder='Price' />
-                <Input placeholder='Due/Pickup' />
-            </Flex>
-            <Flex>
-                <Input placeholder='Destination' />
-                <Select>
-                    <option value='sea'>Sea</option>
-                    <option value='air'>Air</option>
-                    <option value='courier'>Courier</option>
-                    <option value='truck'>Truck</option>
-                </Select>
-                <Input placeholder='Arrival Date' />
-                <Select>
-                    <option value='placed'>Placed</option>
-                    <option value='reviewing'>Reviewing</option>
-                    <option value='needsapproval'>Needs Approval</option>
-                    <option value='cancelled'>Cancelled</option>
-                    <option value='complete'>Complete</option>
-                    <option value='enroute'>En Route</option>
-                    <option value='delivered'>Delivered</option>
-                </Select>
-            </Flex>
-            <Button maxWidth={'30%'} margin={5} type='submit' onClick={() => handleSubmit}>{isEditMode ? "Update" : "Create"}</Button>
             </FormControl>
         </Card>
         </>    
     )
 }
+
+PoLineItemForm.propTypes = {
+    isEditMode: PropTypes.bool.isRequired,
+    editedData: PropTypes.shape({
+      ponumber: PropTypes.string,
+      placed: PropTypes.string,
+      supplier: PropTypes.string,
+      currency: PropTypes.string,
+      description: PropTypes.string,
+      lines: PropTypes.arrayOf(
+        PropTypes.shape({
+          fgmat: PropTypes.string,
+          finalproduct: PropTypes.string,
+          sku: PropTypes.string,
+          description: PropTypes.string,
+          quantity: PropTypes.number,
+          price: PropTypes.number,
+          duedate: PropTypes.string,
+          destination: PropTypes.string,
+          shipmethod: PropTypes.string,
+          arrivaldate: PropTypes.string,
+          status: PropTypes.string,
+        })
+      ),
+    }),
+}
+  
 
 export default PoLineItemForm
