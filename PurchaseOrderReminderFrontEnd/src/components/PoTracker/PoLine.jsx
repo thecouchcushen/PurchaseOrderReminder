@@ -1,3 +1,11 @@
+/**
+ * PoLine.jsx
+ * Description: This component renders a single Purchase Order in the PO tracker, then calls each individual SKU from that Purchase Order
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
+
 import { useEffect, useState } from "react"
 import PoSkuLine from "./PoSkuLine"
 import {
@@ -16,12 +24,14 @@ import {
 } from '@chakra-ui/react'
 import PropTypes from 'prop-types'
 
-
 const PoLine = (props) => {
+  
     const {handleEditPo, poToDisplay} = props
-
-    const [poValue, setPoValue] = useState(0)
     
+    //Initialize state variables
+    const [poValue, setPoValue] = useState(0)
+
+    //Calculate the total value of the PO
     useEffect(() => {
         var totalPoValueAccumulator = 0
         poToDisplay.lineitems.forEach(line => {
@@ -34,7 +44,7 @@ const PoLine = (props) => {
       //console.log(poToDisplay)
       handleEditPo(poToDisplay)
     }
-    
+    //Render the Purchase Order Line
     return (
         <AccordionItem>
           <h2>

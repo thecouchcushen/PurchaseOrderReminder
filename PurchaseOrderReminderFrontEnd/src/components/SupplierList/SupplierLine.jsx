@@ -1,3 +1,11 @@
+/**
+ * Supplier.jsx
+ * Description: This component renders a single line of the Supplier List
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
+
 import { 
     Tr,
     Td
@@ -5,6 +13,7 @@ import {
 
 const SupplierLine = (propObject) => {
     const supplierToDisplay = propObject.supplier
+    //Render the Supplier Line
     return (
         <Tr>
             <Td>{supplierToDisplay.name}</Td>

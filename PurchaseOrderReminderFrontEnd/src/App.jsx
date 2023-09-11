@@ -1,3 +1,11 @@
+/**
+ * PoTracker.js
+ * Description: This componet renders the Purchase Order Tracker at a high level and calls PoLine for each Purchase Order
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
+
 import PoTracker from './components/PoTracker/PoTracker'
 import SupplierList from './components/SupplierList/SupplierList'
 import SkuCatalog from './components/SkuCatalog/SkuCatalog'
@@ -8,10 +16,10 @@ import {
 import { 
   ChakraProvider
 } from '@chakra-ui/react'
-//import './App.css'
 
 function App() {
 
+  //Render the Purchase Order Tracker with the routes to the Supplier List and SKU Catalog as well
   return (
     <ChakraProvider>
       <Router>

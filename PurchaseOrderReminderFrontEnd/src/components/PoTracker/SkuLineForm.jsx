@@ -1,3 +1,10 @@
+/**
+ * SkuLineForm.jsx
+ * Description: This component renders the form for each individual SKU line as part of the Purchase Order form
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
 import { 
     Input,
     Flex,
@@ -11,11 +18,12 @@ const SkuLineForm = (props) => {
     
     const {handleSkuLineInputChange, skuLineIndex, lineData, deleteFunction} = props
 
+    // Handle input changes from the handler passed to the form from the parent component (PoLineItemForm)
     const handleInputChange = (e) => {
         const {name, value} = e.target
         handleSkuLineInputChange(skuLineIndex, name, value)
     }
-
+    //Render the SKU Line Form
     return (
         <>
         <Flex>

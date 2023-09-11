@@ -1,3 +1,10 @@
+/**
+ * PoTrackerContent.jsx
+ * Description: This component renders the content of the PO Tracker page, including the PO Line Items as well as the filters 
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
 import { 
     Table,
     Thead,
@@ -17,11 +24,12 @@ import { useState } from 'react'
 import PoLine from './PoLine'
 import PropTypes from 'prop-types'
 
-
 const PoTrackerContent = (props) => {
+    //Initialize state variables
     const [poLines, setPoLines] = useState([])
     const {handleEditPo} = props
 
+    //Use axios to get the PO data from the backend
     useEffect(() => {
       axios
       .get('http://localhost:3001/pos')
@@ -31,6 +39,7 @@ const PoTrackerContent = (props) => {
       })
     }, [])
 
+    //Render the PO Tracker Content
     return (
     <>
         <Center><h1>PO Line Items</h1></Center>

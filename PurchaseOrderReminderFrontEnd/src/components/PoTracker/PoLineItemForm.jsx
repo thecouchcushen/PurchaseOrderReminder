@@ -1,3 +1,10 @@
+/**
+ * PoLineItemForm.jsx
+ * Description: This component renders the form to add a new Purchase Order or update an existing Purchase Order and calls the form for each individual SKU line
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
 import { 
     Input,
     Button,
@@ -36,15 +43,13 @@ const initialState = {
 }
 
 const PoLineItemForm = (props) => {
+    //initialize state variables
     const [formData, setFormData] = useState(initialState)
     const [numberOfSkus, setNumberOfSkus] = useState(1)
 
     const {editedData, isEditMode} = props
 
-    //useEffect(() => {
-    //    console.log(formData)
-    //}, [formData])
-
+    //Set the form data to the edited data if in edit mode, otherwise set it to the initial state
     useEffect(() => {
         if (isEditMode) {
             //console.log(editedData)
@@ -56,6 +61,7 @@ const PoLineItemForm = (props) => {
         }
     }, [isEditMode, editedData])
 
+    //Handle the input change for the form for each input field
     const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData((prevData) => ({
@@ -63,7 +69,7 @@ const PoLineItemForm = (props) => {
         [name]: value,
     }))
     }
-
+    //Handle the add SKU line button which adds another sku line
     const handleAddSkuLine = () => {
         setNumberOfSkus(numberOfSkus + 1)
         setFormData((prevData) => ({
@@ -71,7 +77,7 @@ const PoLineItemForm = (props) => {
           lineitems: [...prevData.lineitems, blankLine],
         }))
     }
-
+    //Handle the delete SKU line button which deletes a sku line
     const handleSkuLineDelete = (index) => {
         let skusWithoutDeletedSku = formData.lineitems
         skusWithoutDeletedSku.splice(index, 1)
@@ -80,7 +86,7 @@ const PoLineItemForm = (props) => {
         lineitems: skusWithoutDeletedSku,
     }))
     }
-
+    //Handle the input change for the form for each SKU line (passed to the SKU line form)
     const handleSkuLineInputChange = (index, name, value) => {
         // Create a copy of the lines array with the updated SKU line at the specified index
         const updatedLines = formData.lineitems.map((line, i) => {
@@ -102,6 +108,7 @@ const PoLineItemForm = (props) => {
     const handleSubmit = () => {
     //e.preventDefault()
     
+    // Handle form submission logic
     if (isEditMode) {
         // Handle update logic using formData
         // For example, make an API PUT/PATCH request
@@ -113,6 +120,7 @@ const PoLineItemForm = (props) => {
     }
     }
 
+    //Render the Purchase Order Form
     return (
         <>
         <Card>

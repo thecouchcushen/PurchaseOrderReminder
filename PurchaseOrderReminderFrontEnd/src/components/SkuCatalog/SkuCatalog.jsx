@@ -1,3 +1,10 @@
+/**
+ * SkuCatalog.js
+ * Description: This component renders the SKU Catalog at a high level and calls SkuLine for each SKU
+ * Author: Liam Cushen
+ * Date: 2023-09-01
+ */
+
 import { useEffect, useState } from "react"
 import SkuLine from "./SkuLine"
 import axios from 'axios'
@@ -12,9 +19,12 @@ import {
     Text
   } from '@chakra-ui/react'
 
+
 const SkuCatalog = () => {
+    //Initialize state variables
     const [skus, setSkus] = useState([])
 
+    //Use axios to get the SKU data from the backend
     useEffect(() => {
         axios
         .get('http://localhost:3001/skus')
@@ -24,6 +34,7 @@ const SkuCatalog = () => {
         })
       }, [])
 
+      //Render the SKU Catalog
       return (
         <>
             <Text
