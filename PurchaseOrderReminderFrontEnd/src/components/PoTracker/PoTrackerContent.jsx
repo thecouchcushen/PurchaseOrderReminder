@@ -15,10 +15,12 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PoLine from './PoLine'
+import PropTypes from 'prop-types'
 
 
-const PoTrackerContent = () => {
+const PoTrackerContent = (props) => {
     const [poLines, setPoLines] = useState([])
+    const {handleEditPo} = props
 
     useEffect(() => {
       axios
@@ -60,8 +62,9 @@ const PoTrackerContent = () => {
           {
             poLines.map(lineItem => 
               <PoLine 
-                line={lineItem} 
+                poToDisplay={lineItem} 
                 key={"LineNumber" + lineItem.id} 
+                handleEditPo={handleEditPo}
               />
             )
           }
@@ -69,4 +72,9 @@ const PoTrackerContent = () => {
         </>
     )
 }
+
+PoTrackerContent.propTypes = {
+  handleEditPo: PropTypes.func.isRequired,
+}
+
 export default PoTrackerContent

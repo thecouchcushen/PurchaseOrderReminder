@@ -29,8 +29,8 @@ const initialState = {
     placed: '',
     supplier: '',
     currency: '',
-    description: '',
-    lines: [
+    podescription: '',
+    lineitems: [
         blankLine
     ]
 }
@@ -39,7 +39,7 @@ const PoLineItemForm = (props) => {
     const [formData, setFormData] = useState(initialState)
     const [numberOfSkus, setNumberOfSkus] = useState(1)
 
-    const {isEditMode, editedData} = props
+    const {editedData, isEditMode} = props
 
     //useEffect(() => {
     //    console.log(formData)
@@ -47,11 +47,12 @@ const PoLineItemForm = (props) => {
 
     useEffect(() => {
         if (isEditMode) {
+            //console.log(editedData)
             setFormData(editedData)
-            setNumberOfSkus(editedData.lines.length)
+            setNumberOfSkus(editedData.lineitems.length)
         } else {
             setFormData(initialState)
-            setNumberOfSkus(initialState.lines.length)
+            setNumberOfSkus(initialState.lineitems.length)
         }
     }, [isEditMode, editedData])
 
@@ -67,22 +68,22 @@ const PoLineItemForm = (props) => {
         setNumberOfSkus(numberOfSkus + 1)
         setFormData((prevData) => ({
           ...prevData,
-          lines: [...prevData.lines, blankLine],
+          lineitems: [...prevData.lineitems, blankLine],
         }))
     }
 
     const handleSkuLineDelete = (index) => {
-        let skusWithoutDeletedSku = formData.lines
+        let skusWithoutDeletedSku = formData.lineitems
         skusWithoutDeletedSku.splice(index, 1)
         setFormData((prevData) => ({
         ...prevData,
-        lines: skusWithoutDeletedSku,
+        lineitems: skusWithoutDeletedSku,
     }))
     }
 
     const handleSkuLineInputChange = (index, name, value) => {
         // Create a copy of the lines array with the updated SKU line at the specified index
-        const updatedLines = formData.lines.map((line, i) => {
+        const updatedLines = formData.lineitems.map((line, i) => {
           if (i === index) {
             return {
               ...line,
@@ -94,7 +95,7 @@ const PoLineItemForm = (props) => {
     
         setFormData((prevData) => ({
           ...prevData,
-          lines: updatedLines,
+          lineitems: updatedLines,
         }))
       }
 
@@ -121,11 +122,11 @@ const PoLineItemForm = (props) => {
                 <Input maxWidth={'50%'} margin={'2'} placeholder='Placed' type='date' name='placed' value={formData.placed} onChange={handleInputChange} />
                 <Input maxWidth={'50%'} margin={'2'} placeholder='Supplier' type='text' name='supplier' value={formData.supplier} onChange={handleInputChange}/>
                 <Input maxWidth={'10%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
-                <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='description' value={formData.description} onChange={handleInputChange}/>
+                <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='description' value={formData.podescription} onChange={handleInputChange}/>
 
                 <Button maxWidth={'30%'} margin={5} onClick={handleAddSkuLine}>Add SKU Line</Button>
 
-                {formData.lines.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} />
+                {formData.lineitems.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} />
                 )}
                 
                 <Button maxWidth={'30%'} margin={5} type='submit' onClick={handleSubmit}>{isEditMode ? "Update" : "Create"}</Button>
@@ -144,7 +145,7 @@ PoLineItemForm.propTypes = {
       supplier: PropTypes.string,
       currency: PropTypes.string,
       description: PropTypes.string,
-      lines: PropTypes.arrayOf(
+      lineitems: PropTypes.arrayOf(
         PropTypes.shape({
           fgmat: PropTypes.string,
           finalproduct: PropTypes.string,

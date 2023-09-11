@@ -9,12 +9,17 @@
             "currency": "USD",
             "lineitems": [
                 {
+                    "fgmat": "materials",
+                    "finalproduct": "323-2-3",
                     "sku": "323-2-3P",
+                    "description": "Envelope for Recycling without Deco",
                     "quantity": 180000,
                     "price": 0.188,
                     "duedate": "10/15/2023",
                     "destination": "Geodis",
-                    "shipmethod": "Sea"
+                    "shipmethod": "sea",
+                    "arrivaldate": "11/15/2023",
+                    "status": "Placed"
                 }
             ]
         },
@@ -27,12 +32,17 @@
             "currency": "USD",
             "lineitems": [
                 {
+                    "fgmat": "finishedgood",
+                    "finalproduct": "323-4-61",
                     "sku": "323-4-61",
+                    "description": "L30 Biotin Gummies Product Cards",
                     "quantity": 30000,
                     "price": 0.03,
                     "duedate": "11/01/2023",
                     "destination": "Shipmonk",
-                    "shipmethod": "Air"
+                    "shipmethod": "air",
+                    "arrivaldate": "11/15/2023",
+                    "status": "Placed"
                 }
             ]
         },
@@ -45,12 +55,17 @@
             "currency": "EUR",
             "lineitems": [
                 {
+                    "fgmat": "finishedgood",
+                    "finalproduct": "323-63450",
                     "sku": "323-63450",
+                    "description": "E27 Liquid Collagen - Mango",
                     "quantity": 600000,
                     "price": 6.10,
                     "duedate": "10/15/2023",
                     "destination": "Geodis",
-                    "shipmethod": "Sea"
+                    "shipmethod": "sea",
+                    "arrivaldate": "11/15/2023",
+                    "status": "Placed"
                 }
             ]
         }

@@ -30,7 +30,7 @@ const SkuLineForm = (props) => {
                 <Input placeholder='Description' name='description' onChange={handleInputChange} value={lineData.description} />
                 <Input placeholder='Quantity' name='quantity' onChange={handleInputChange} value={lineData.quantity} />
                 <Input placeholder='Price' name='price' onChange={handleInputChange} value={lineData.price} />
-                <Input placeholder='Due/Pickup' />
+                <Input placeholder='Due/Pickup' name='duedate' onChange={handleInputChange} value={lineData.duedate} />
             </Flex>
             <Flex>
                 <Input placeholder='Destination' name='destination' onChange={handleInputChange} value={lineData.destination} />
@@ -58,22 +58,22 @@ const SkuLineForm = (props) => {
 }
 
 SkuLineForm.propTypes = {
-    handleSkuLineInputChange: PropTypes.func.isRequired,
-    skuLineIndex: PropTypes.number.isRequired,
+    handleSkuLineInputChange: PropTypes.func,
+    skuLineIndex: PropTypes.number,
     lineData: PropTypes.shape({
-      fgmat: PropTypes.string.isRequired,
-      finalproduct: PropTypes.string.isRequired,
-      sku: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      duedate: PropTypes.string.isRequired,
-      destination: PropTypes.string.isRequired,
-      shipmethod: PropTypes.string.isRequired,
-      arrivaldate: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-    }).isRequired,
-    deleteFunction: PropTypes.func.isRequired,
+      fgmat: PropTypes.string,
+      finalproduct: PropTypes.string,
+      sku: PropTypes.string,
+      description: PropTypes.string,
+      quantity: PropTypes.number,
+      price: PropTypes.number,
+      duedate: PropTypes.string,
+      destination: PropTypes.string,
+      shipmethod: PropTypes.string,
+      arrivaldate: PropTypes.string,
+      status: PropTypes.string,
+    }),
+    deleteFunction: PropTypes.func,
   }
 
 export default SkuLineForm

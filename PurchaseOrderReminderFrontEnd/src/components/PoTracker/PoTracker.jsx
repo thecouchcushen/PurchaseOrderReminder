@@ -6,38 +6,44 @@ import {
   Text,
   Button
 } from '@chakra-ui/react'
-import {
-  Routes, Route, Link
-} from 'react-router-dom'
+
 
 const PoTracker = () => {
-    const [showForm, setShowForm] = useState(false)
-    const [formButtonText, setFormButtonText] = useState('Add PO')
+    const [selectedPo, setSelectedPo] = useState(null)
+    const [isAddingPo, setIsAddingPo] = useState(false)
 
-    function handleFormButton (showForm, formButtonText) {
-      setShowForm(!showForm)
-      if (formButtonText === 'Add PO') {
-        setFormButtonText('Cancel')
+    const handleEditPo = (poData) => {
+      setIsAddingPo(true)
+      setSelectedPo(poData)
+    }
+
+    const handleAddButton = () => {
+
+      if (isAddingPo) {
+        setIsAddingPo(false)
+        setSelectedPo(null)
       } else {
-        setFormButtonText('Add PO')
+        setIsAddingPo(true)
       }
+      
     }
 
     return (
     <>
       <Text
-      bgGradient='linear(to-l, #7928CA, #FF0080)'
-      bgClip='text'
-      fontSize='6xl'
-      fontWeight='extrabold'
+        bgGradient='linear(to-l, #7928CA, #FF0080)'
+        bgClip='text'
+        fontSize='6xl'
+        fontWeight='extrabold'
       >
         PO Tracker
       </Text>
-      <Button onClick={() => handleFormButton(showForm, formButtonText)}>{formButtonText}</Button>
+      <Button onClick={handleAddButton}>{isAddingPo ? 'Cancel' : 'Add PO'}</Button>
 
-      {showForm ? ( <PoLineItemForm isEditMode={false}/> ) : ( <PoTrackerContent /> ) }
+      {isAddingPo ? <PoLineItemForm editedData={selectedPo} isEditMode={!!selectedPo} /> : <PoTrackerContent handleEditPo={handleEditPo} />}
 
       
+
     </>
     )
 

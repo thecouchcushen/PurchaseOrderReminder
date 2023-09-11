@@ -14,11 +14,14 @@ import {
     Th,
     Button
 } from '@chakra-ui/react'
+import PropTypes from 'prop-types'
 
-const PoLine = (propsObject) => {
-    const poToDisplay = propsObject.line
+
+const PoLine = (props) => {
+    const {handleEditPo, poToDisplay} = props
+
     const [poValue, setPoValue] = useState(0)
-
+    
     useEffect(() => {
         var totalPoValueAccumulator = 0
         poToDisplay.lineitems.forEach(line => {
@@ -27,6 +30,10 @@ const PoLine = (propsObject) => {
         setPoValue(totalPoValueAccumulator)
     }, [poToDisplay.lineitems])
     
+    const onClickEdit = () => {
+      //console.log(poToDisplay)
+      handleEditPo(poToDisplay)
+    }
     
     return (
         <AccordionItem>
@@ -42,7 +49,7 @@ const PoLine = (propsObject) => {
                         <Td>{poToDisplay.podescription}</Td>
                         <Td>{poValue}</Td>  
                         <Td>{poToDisplay.currency}</Td>  
-                        <Td><Button>Edit</Button></Td>
+                        <Td><Button onClick={onClickEdit}>Edit</Button></Td>
                         
                     </Tr>
                   </Tbody>
@@ -76,6 +83,33 @@ const PoLine = (propsObject) => {
         </AccordionItem>
         
     )
+}
+
+PoLine.propTypes = {
+    handleEditPo: PropTypes.func,
+    poToDisplay: PropTypes.shape({
+        id: PropTypes.number,
+        ponumber: PropTypes.string,
+        placed: PropTypes.string,
+        supplier: PropTypes.string,
+        currency: PropTypes.string,
+        podescription: PropTypes.string,
+        lineitems: PropTypes.arrayOf(
+            PropTypes.shape({
+                fgmat: PropTypes.string,
+                finalproduct: PropTypes.string,
+                sku: PropTypes.string,
+                description: PropTypes.string,
+                quantity: PropTypes.number,
+                price: PropTypes.number,
+                duedate: PropTypes.string,
+                destination: PropTypes.string,
+                shipmethod: PropTypes.string,
+                arrivaldate: PropTypes.string,
+                status: PropTypes.string,
+            })
+        ),
+    }),
 }
 
 export default PoLine
