@@ -20,6 +20,9 @@ import {
     Text
   } from '@chakra-ui/react'
 
+//TODO: Implement filters
+//TODO: Implement delete supplier capability
+//TODO: Implement edit/add supplier capability
 
 const SupplierList = () => {
     //Initialize state variables

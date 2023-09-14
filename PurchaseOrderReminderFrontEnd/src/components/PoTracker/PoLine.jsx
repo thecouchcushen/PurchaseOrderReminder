@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 
 const PoLine = (props) => {
   
-    const {handleEditPo, poToDisplay} = props
+    const {handleEditPo, poToDisplay, handleDeletePo} = props
     
     //Initialize state variables
     const [poValue, setPoValue] = useState(0)
@@ -60,7 +60,7 @@ const PoLine = (props) => {
                         <Td>{poValue}</Td>  
                         <Td>{poToDisplay.currency}</Td>  
                         <Td><Button onClick={onClickEdit}>Edit</Button></Td>
-                        
+                        <Td><Button onClick={handleDeletePo}>Delete</Button></Td>
                     </Tr>
                   </Tbody>
                 </Table>
@@ -97,6 +97,7 @@ const PoLine = (props) => {
 
 PoLine.propTypes = {
     handleEditPo: PropTypes.func,
+    handleDeletePo: PropTypes.func,
     poToDisplay: PropTypes.shape({
         id: PropTypes.number,
         ponumber: PropTypes.string,

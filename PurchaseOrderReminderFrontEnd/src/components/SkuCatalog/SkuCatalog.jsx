@@ -19,6 +19,9 @@ import {
     Text
   } from '@chakra-ui/react'
 
+//TODO: Implement filters
+//TODO: Implement delete sku capability
+//TODO: Implement edit/add sku capability
 
 const SkuCatalog = () => {
     //Initialize state variables

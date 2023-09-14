@@ -18,11 +18,12 @@ import {
     Accordion,
     
 } from '@chakra-ui/react'
-import axios from 'axios'
+//import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PoLine from './PoLine'
 import PropTypes from 'prop-types'
+import polineitems from '../../services/polineitems'
 
 const PoTrackerContent = (props) => {
     //Initialize state variables
@@ -31,15 +32,19 @@ const PoTrackerContent = (props) => {
 
     //Use axios to get the PO data from the backend
     useEffect(() => {
-      axios
-      .get('http://localhost:3001/pos')
-      .then(response => {
-        //console.log('promise fulfilled')
-        setPoLines(response.data)
+      polineitems.getAll().then(response => {
+        setPoLines(response)
       })
     }, [])
 
+    //Handle the delete button on each PO
+    //TODO: Implement delete PO capability
+    const handleDeletePo = (poIndex) => {
+      console.log("Delete PO with ID", poLines[poIndex].ponumber)
+    }
+
     //Render the PO Tracker Content
+    //TODO: Implement filters
     return (
     <>
         <Center><h1>PO Line Items</h1></Center>
@@ -69,11 +74,12 @@ const PoTrackerContent = (props) => {
         </TableContainer>
         <Accordion allowMultiple>
           {
-            poLines.map(lineItem => 
+            poLines.map((lineItem, i) => 
               <PoLine 
                 poToDisplay={lineItem} 
                 key={"LineNumber" + lineItem.id} 
                 handleEditPo={handleEditPo}
+                handleDeletePo={() => handleDeletePo(i)}
               />
             )
           }

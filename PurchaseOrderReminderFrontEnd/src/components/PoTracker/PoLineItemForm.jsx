@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from 'react'
 import SkuLineForm from './SkuLineForm'
 import PropTypes from 'prop-types'
+import polineitems from '../../services/polineitems'
 
 const blankLine = {
     
@@ -116,11 +117,18 @@ const PoLineItemForm = (props) => {
     } else {
         // Handle new entry logic using formData
         // For example, make an API POST request
+        polineitems.create(formData)
         console.log(formData)
     }
     }
 
     //Render the Purchase Order Form
+    //TODO: Implement form validation
+      //typerror message thrown when quantity in price or quantity becomes 0 because it is reading a string when it can only be a number
+      //make it so that the suppliers/currency/sku/finalsku/destination must be pulled from existing entries in a database
+    //TODO: Make the form look better
+    //TODO: Implement the form submission logic for editing
+    //TODO: on submit, the form should go away and the po content should be shown
     return (
         <>
         <Card>
@@ -130,7 +138,7 @@ const PoLineItemForm = (props) => {
                 <Input maxWidth={'50%'} margin={'2'} placeholder='Placed' type='date' name='placed' value={formData.placed} onChange={handleInputChange} />
                 <Input maxWidth={'50%'} margin={'2'} placeholder='Supplier' type='text' name='supplier' value={formData.supplier} onChange={handleInputChange}/>
                 <Input maxWidth={'10%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
-                <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='description' value={formData.podescription} onChange={handleInputChange}/>
+                <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='podescription' value={formData.podescription} onChange={handleInputChange}/>
 
                 <Button maxWidth={'30%'} margin={5} onClick={handleAddSkuLine}>Add SKU Line</Button>
 

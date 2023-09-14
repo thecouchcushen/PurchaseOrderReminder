@@ -1,138 +1,161 @@
 {
-    "pos": [
+  "pos": [
+    {
+      "id": 1,
+      "placed": "08/01/2023",
+      "ponumber": "PO22000188",
+      "podescription": "Recycling Envelope Secondary Reorder",
+      "supplier": "Grounded Packaging",
+      "currency": "USD",
+      "lineitems": [
         {
-            "id": 1,
-            "placed": "08/01/2023",
-            "ponumber": "PO22000188",
-            "podescription": "Recycling Envelope Secondary Reorder",
-            "supplier": "Grounded Packaging",
-            "currency": "USD",
-            "lineitems": [
-                {
-                    "fgmat": "materials",
-                    "finalproduct": "323-2-3",
-                    "sku": "323-2-3P",
-                    "description": "Envelope for Recycling without Deco",
-                    "quantity": 180000,
-                    "price": 0.188,
-                    "duedate": "10/15/2023",
-                    "destination": "Geodis",
-                    "shipmethod": "sea",
-                    "arrivaldate": "11/15/2023",
-                    "status": "Placed"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "placed": "07/15/2023",
-            "ponumber": "PO23000064",
-            "podescription": "L30 Product Card First Order New Size",
-            "supplier": "Skillful Printing",
-            "currency": "USD",
-            "lineitems": [
-                {
-                    "fgmat": "finishedgood",
-                    "finalproduct": "323-4-61",
-                    "sku": "323-4-61",
-                    "description": "L30 Biotin Gummies Product Cards",
-                    "quantity": 30000,
-                    "price": 0.03,
-                    "duedate": "11/01/2023",
-                    "destination": "Shipmonk",
-                    "shipmethod": "air",
-                    "arrivaldate": "11/15/2023",
-                    "status": "Placed"
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "placed": "08/01/2023",
-            "ponumber": "PO23000107",
-            "podescription": "August Tosla Order - E27 Mango",
-            "supplier": "Tosla d.o.o.",
-            "currency": "EUR",
-            "lineitems": [
-                {
-                    "fgmat": "finishedgood",
-                    "finalproduct": "323-63450",
-                    "sku": "323-63450",
-                    "description": "E27 Liquid Collagen - Mango",
-                    "quantity": 600000,
-                    "price": 6.10,
-                    "duedate": "10/15/2023",
-                    "destination": "Geodis",
-                    "shipmethod": "sea",
-                    "arrivaldate": "11/15/2023",
-                    "status": "Placed"
-                }
-            ]
+          "fgmat": "materials",
+          "finalproduct": "323-2-3",
+          "sku": "323-2-3P",
+          "description": "Envelope for Recycling without Deco",
+          "quantity": 180000,
+          "price": 0.188,
+          "duedate": "10/15/2023",
+          "destination": "Geodis",
+          "shipmethod": "sea",
+          "arrivaldate": "11/15/2023",
+          "status": "Placed"
         }
-    ],
-    "suppliers": [
+      ]
+    },
+    {
+      "id": 2,
+      "placed": "07/15/2023",
+      "ponumber": "PO23000064",
+      "podescription": "L30 Product Card First Order New Size",
+      "supplier": "Skillful Printing",
+      "currency": "USD",
+      "lineitems": [
         {
-            "id": 1,
-            "name": "Tosla d.o.o.",
-            "deposit": 0.0,
-            "balance": 1,
-            "daysafterpickup": 30
-        },
-        {
-            "id": 2,
-            "name": "Grounded Packaging",
-            "deposit": 0.3,
-            "balance": 0.7,
-            "daysafterpickup": 0
-        },
-        {
-            "id": 3,
-            "name": "Skillful Printing",
-            "deposit": 0.3,
-            "balance": 0.7,
-            "daysafterpickup": 0
-        },
-        {
-            "id": 4,
-            "name": "CCG",
-            "deposit": 0.0,
-            "balance": 1.0,
-            "daysafterpickup": 30
+          "fgmat": "finishedgood",
+          "finalproduct": "323-4-61",
+          "sku": "323-4-61",
+          "description": "L30 Biotin Gummies Product Cards",
+          "quantity": 30000,
+          "price": 0.03,
+          "duedate": "11/01/2023",
+          "destination": "Shipmonk",
+          "shipmethod": "air",
+          "arrivaldate": "11/15/2023",
+          "status": "Placed"
         }
-    ],
-    "skus": [
+      ]
+    },
+    {
+      "id": 3,
+      "placed": "08/01/2023",
+      "ponumber": "PO23000107",
+      "podescription": "August Tosla Order - E27 Mango",
+      "supplier": "Tosla d.o.o.",
+      "currency": "EUR",
+      "lineitems": [
         {
-            "id": 1,
-            "sku": "323-2-3P",
-            "name": "Envelope for Recycling without Deco",
-            "unit": "ea",
-            "bom": []
-        },
-        {
-            "id": 2,
-            "sku": "323-2-3",
-            "name": "Assembled Recycling Envelope",
-            "unit": "ea",
-            "bom": [
-                {
-                    "sku": "323-2-3P",
-                    "quantity": 1
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "sku": "323-63450",
-            "name": "E27 Liquid Collagen - Mango",
-            "unit": "ea",
-            "bom": []
-        },
-        {
-            "id": 4,
-            "sku": "323-4-61",
-            "name": "L30 Biotin Gummies Product Cards",
-            "unit": "ea",
-            "bom": []
+          "fgmat": "finishedgood",
+          "finalproduct": "323-63450",
+          "sku": "323-63450",
+          "description": "E27 Liquid Collagen - Mango",
+          "quantity": 600000,
+          "price": 6.1,
+          "duedate": "10/15/2023",
+          "destination": "Geodis",
+          "shipmethod": "sea",
+          "arrivaldate": "11/15/2023",
+          "status": "Placed"
         }
-    ]
+      ]
+    },
+    {
+      "ponumber": "PO230001XX",
+      "placed": "2023-09-13",
+      "supplier": "Capsum",
+      "currency": "USD",
+      "podescription": "S33+ Reorder",
+      "lineitems": [
+        {
+          "fgmat": "",
+          "finalproduct": "323-21130A",
+          "sku": "323-21130A",
+          "description": "S33+ Full Size",
+          "quantity": "100000",
+          "price": "3.83",
+          "duedate": "12/01/2023",
+          "destination": "Geodis PA",
+          "shipmethod": "truck",
+          "arrivaldate": "12/15/2023",
+          "status": ""
+        }
+      ],
+      "id": 4
+    }
+  ],
+  "suppliers": [
+    {
+      "id": 1,
+      "name": "Tosla d.o.o.",
+      "deposit": 0,
+      "balance": 1,
+      "daysafterpickup": 30
+    },
+    {
+      "id": 2,
+      "name": "Grounded Packaging",
+      "deposit": 0.3,
+      "balance": 0.7,
+      "daysafterpickup": 0
+    },
+    {
+      "id": 3,
+      "name": "Skillful Printing",
+      "deposit": 0.3,
+      "balance": 0.7,
+      "daysafterpickup": 0
+    },
+    {
+      "id": 4,
+      "name": "CCG",
+      "deposit": 0,
+      "balance": 1,
+      "daysafterpickup": 30
+    }
+  ],
+  "skus": [
+    {
+      "id": 1,
+      "sku": "323-2-3P",
+      "name": "Envelope for Recycling without Deco",
+      "unit": "ea",
+      "bom": []
+    },
+    {
+      "id": 2,
+      "sku": "323-2-3",
+      "name": "Assembled Recycling Envelope",
+      "unit": "ea",
+      "bom": [
+        {
+          "sku": "323-2-3P",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sku": "323-63450",
+      "name": "E27 Liquid Collagen - Mango",
+      "unit": "ea",
+      "bom": []
+    },
+    {
+      "id": 4,
+      "sku": "323-4-61",
+      "name": "L30 Biotin Gummies Product Cards",
+      "unit": "ea",
+      "bom": []
+    }
+  ]
 }
