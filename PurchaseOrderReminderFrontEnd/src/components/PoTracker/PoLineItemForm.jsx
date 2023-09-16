@@ -61,7 +61,7 @@ const PoLineItemForm = (props) => {
             setNumberOfSkus(initialState.lineitems.length)
         }
     }, [isEditMode, editedData])
-    
+
     //Handle the input change for the form for each input field
     const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -126,6 +126,7 @@ const PoLineItemForm = (props) => {
     //TODO: Implement form validation
       //typerror message thrown when quantity in price or quantity becomes 0 because it is reading a string when it can only be a number
       //make it so that the suppliers/currency/sku/finalsku/destination must be pulled from existing entries in a database
+      //Cast quantity and price to numbers
     //TODO: Make the form look better
     //TODO: Implement the form submission logic for editing
     //TODO: on submit, the form should go away and the po content should be shown
