@@ -37,17 +37,59 @@ const PoTrackerContent = (props) => {
       minCost: 0,
       maxCost: Infinity, // You can set this to a reasonable upper limit
     })
+    const [descriptionFilter, setDescriptionFilter] = useState('')
+    const [supplierFilter, setSupplierFilter] = useState('')
+    const [currencyFilter, setCurrencyFilter] = useState('')
+    const [poNumberFilter, setPoNumberFilter] = useState('')
+    
+    const handleDescriptionFilterChange = (e) => {
+      setDescriptionFilter(e.target.value)
+    }
+    
+    const handleSupplierFilterChange = (e) => {
+      setSupplierFilter(e.target.value)
+    }
+    
+    const handleCurrencyFilterChange = (e) => {
+      setCurrencyFilter(e.target.value)
+    }
+    
+    const handlePoNumberFilterChange = (e) => {
+      setPoNumberFilter(e.target.value)
+    }
+    
 
     const handlePlacementDateFilterChange = (e) => {
       setPlacementDateRange((prevDateRange) => ({
         ...prevDateRange,
         [e.target.name]: new Date(e.target.value),
       }))
+
       console.log(placementDateRange)
     }
     
-    const handleTotalCostFilterChange = (minCost, maxCost) => {
-      setTotalCostRange({ minCost, maxCost });
+    // Handle changes to the total cost filter. If the filter is empty, set the value to 0 or Infinity depending on if it is the minCost or maxCost input
+    const handleTotalCostFilterChange = (e) => {
+      if (e.target.value === "") {
+        if (e.target.name === "minCost") {
+          setTotalCostRange((prevCostRange) => ({
+            ...prevCostRange,
+            [e.target.name]: 0
+          }))
+          } else {
+            setTotalCostRange((prevCostRange) => ({
+              ...prevCostRange,
+              [e.target.name]: Infinity
+            }))
+          }
+        } else {
+          setTotalCostRange((prevCostRange) => ({
+            ...prevCostRange,
+            [e.target.name]: e.target.value,
+          }))
+        }
+
+      console.log(totalCostRange)
     }
 
     const calculateTotalCost = (lineitems) => {
@@ -60,8 +102,8 @@ const PoTrackerContent = (props) => {
     
     const filteredPoLines = poLines.filter((po) => {
       // Check if the placement date is within the specified range
-      const placementDate = new Date(po.placed);
-      const { startDate, endDate } = placementDateRange;
+      const placementDate = new Date(po.placed)
+      const { startDate, endDate } = placementDateRange
       if (startDate && endDate) {
         if (
           placementDate < startDate ||
@@ -73,9 +115,29 @@ const PoTrackerContent = (props) => {
     
       // Check if the total cost is within the specified range
       const totalCost = calculateTotalCost(po.lineitems)
-      const { minCost, maxCost } = totalCostRange;
+      const { minCost, maxCost } = totalCostRange
       if (totalCost < minCost || totalCost > maxCost) {
-        return false; // Filter out items not within the cost range
+        return false // Filter out items not within the cost range
+      }
+
+      // Check if the PO description contains the filter text (case-insensitive)
+      if (descriptionFilter && !po.podescription.toLowerCase().includes(descriptionFilter.toLowerCase())) {
+        return false // Filter out items that don't match the description filter
+      }
+
+      // Check if the supplier contains the filter text (case-insensitive)
+      if (supplierFilter && !po.supplier.toLowerCase().includes(supplierFilter.toLowerCase())) {
+        return false // Filter out items that don't match the supplier filter
+      }
+
+      // Check if the currency contains the filter text (case-insensitive)
+      if (currencyFilter && !po.currency.toLowerCase().includes(currencyFilter.toLowerCase())) {
+        return false // Filter out items that don't match the currency filter
+      }
+
+      // Check if the PO number contains the filter text
+      if (poNumberFilter && !po.ponumber.includes(poNumberFilter)) {
+        return false // Filter out items that don't match the PO number filter
       }
     
       return true // Include items that pass all filters
@@ -122,12 +184,12 @@ const PoTrackerContent = (props) => {
               <Tr>
                 <Td><Input placeholder='Start Date' name='startDate' value={placementDateRange.startDate} type='date' onChange={handlePlacementDateFilterChange} ></Input></Td>
                 <Td><Input placeholder='End Date' name='endDate' value={placementDateRange.endDate} type='date' onChange={handlePlacementDateFilterChange} ></Input></Td>
-                <Td><Input placeholder='PO Filter'></Input></Td>
-                <Td><Input placeholder='Description Filter'></Input></Td>
-                <Td><Input placeholder='Supplier Filter'></Input></Td>
-                <Td><Input placeholder='Cost Filter Bottom'></Input></Td>
-                <Td><Input placeholder='Cost Filter Top'></Input></Td>
-                <Td><Input placeholder='Currency Filter'></Input></Td>
+                <Td><Input placeholder='PO Filter' name='ponumber' value={poNumberFilter} onChange={handlePoNumberFilterChange}></Input></Td>
+                <Td><Input placeholder='Description Filter' name='description' value={descriptionFilter} onChange={handleDescriptionFilterChange}></Input></Td>
+                <Td><Input placeholder='Supplier Filter' name='supplier' value={supplierFilter} onChange={handleSupplierFilterChange}></Input></Td>
+                <Td><Input placeholder='Minimum Cost' name='minCost' value={totalCostRange.minCost} type='number' onChange={handleTotalCostFilterChange}></Input></Td>
+                <Td><Input placeholder='Maximum Cost' name='maxCost' value={totalCostRange.maxCost} type='number' onChange={handleTotalCostFilterChange}></Input></Td>
+                <Td><Input placeholder='Currency Filter' name='currency' value={currencyFilter} onChange={handleCurrencyFilterChange}></Input></Td>
               </Tr>
             </Thead>
           </Table>
