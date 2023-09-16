@@ -29,9 +29,10 @@ const PoTrackerContent = (props) => {
     //Initialize state variables
     const [poLines, setPoLines] = useState([])
     const [placementDateRange, setPlacementDateRange] = useState({
-      startDate: "2000-01-01",
-      endDate: "2100-12-31",
+      startDate: "01/01/2020",
+      endDate: "12/31/2025",
     })
+    const [usePlacementDateFilter, setUsePlacementDateFilter] = useState(true)
     
     const [totalCostRange, setTotalCostRange] = useState({
       minCost: 0,
@@ -42,6 +43,8 @@ const PoTrackerContent = (props) => {
     const [currencyFilter, setCurrencyFilter] = useState('')
     const [poNumberFilter, setPoNumberFilter] = useState('')
     
+    const handleFocus = (e) => e.target.select()
+
     const handleDescriptionFilterChange = (e) => {
       setDescriptionFilter(e.target.value)
     }
@@ -57,16 +60,27 @@ const PoTrackerContent = (props) => {
     const handlePoNumberFilterChange = (e) => {
       setPoNumberFilter(e.target.value)
     }
-    
 
     const handlePlacementDateFilterChange = (e) => {
       setPlacementDateRange((prevDateRange) => ({
         ...prevDateRange,
-        [e.target.name]: new Date(e.target.value),
+        [e.target.name]: e.target.value
       }))
 
+      setUsePlacementDateFilter(false)
+
+      if (/(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/((19|20)\d\d)/.test(e.target.value)) {
+
+      setUsePlacementDateFilter(true)
       console.log(placementDateRange)
     }
+
+    setPlacementDateRange((prevDateRange) => ({
+      ...prevDateRange,
+      [e.target.name]: e.target.value
+    }))
+
+  }
     
     // Handle changes to the total cost filter. If the filter is empty, set the value to 0 or Infinity depending on if it is the minCost or maxCost input
     const handleTotalCostFilterChange = (e) => {
@@ -103,15 +117,18 @@ const PoTrackerContent = (props) => {
     const filteredPoLines = poLines.filter((po) => {
       // Check if the placement date is within the specified range
       const placementDate = new Date(po.placed)
-      const { startDate, endDate } = placementDateRange
-      if (startDate && endDate) {
-        if (
-          placementDate < startDate ||
-          placementDate > endDate
-        ) {
-          return false // Filter out items not within the date range
-        }
+      const startDate = new Date(placementDateRange.startDate)
+      const endDate = new Date(placementDateRange.endDate)
+      // Check if the placement date is within the specified range
+      if (
+        usePlacementDateFilter &&
+        !isNaN(startDate.getTime()) &&
+        !isNaN(endDate.getTime()) &&
+        (placementDate < startDate || placementDate > endDate)
+      ) {
+        return false; // Filter out items not within the date range
       }
+      
     
       // Check if the total cost is within the specified range
       const totalCost = calculateTotalCost(po.lineitems)
@@ -162,7 +179,6 @@ const PoTrackerContent = (props) => {
     }
 
     //Render the PO Tracker Content
-    //TODO: Implement filters
     return (
     <>
         <Center><h1>PO Line Items</h1></Center>
@@ -182,12 +198,12 @@ const PoTrackerContent = (props) => {
                 <Th>Currency</Th>
               </Tr>
               <Tr>
-                <Td><Input placeholder='Start Date' name='startDate' value={placementDateRange.startDate} type='date' onChange={handlePlacementDateFilterChange} ></Input></Td>
-                <Td><Input placeholder='End Date' name='endDate' value={placementDateRange.endDate} type='date' onChange={handlePlacementDateFilterChange} ></Input></Td>
+                <Td><Input placeholder='Start Date' name='startDate' value={placementDateRange.startDate} onChange={handlePlacementDateFilterChange} ></Input></Td>
+                <Td><Input placeholder='End Date' name='endDate' value={placementDateRange.endDate} onChange={handlePlacementDateFilterChange} ></Input></Td>
                 <Td><Input placeholder='PO Filter' name='ponumber' value={poNumberFilter} onChange={handlePoNumberFilterChange}></Input></Td>
                 <Td><Input placeholder='Description Filter' name='description' value={descriptionFilter} onChange={handleDescriptionFilterChange}></Input></Td>
                 <Td><Input placeholder='Supplier Filter' name='supplier' value={supplierFilter} onChange={handleSupplierFilterChange}></Input></Td>
-                <Td><Input placeholder='Minimum Cost' name='minCost' value={totalCostRange.minCost} type='number' onChange={handleTotalCostFilterChange}></Input></Td>
+                <Td><Input placeholder='Minimum Cost' name='minCost' value={totalCostRange.minCost} type='number' onFocus={handleFocus} onChange={handleTotalCostFilterChange}></Input></Td>
                 <Td><Input placeholder='Maximum Cost' name='maxCost' value={totalCostRange.maxCost} type='number' onChange={handleTotalCostFilterChange}></Input></Td>
                 <Td><Input placeholder='Currency Filter' name='currency' value={currencyFilter} onChange={handleCurrencyFilterChange}></Input></Td>
               </Tr>
