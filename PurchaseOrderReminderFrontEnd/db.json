@@ -1,7 +1,7 @@
 {
   "pos": [
     {
-      "id": 1,
+      "id": 0,
       "placed": "08/01/2023",
       "ponumber": "PO22000188",
       "podescription": "Recycling Envelope Secondary Reorder",
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 1,
       "placed": "07/15/2023",
       "ponumber": "PO23000064",
       "podescription": "L30 Product Card First Order New Size",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "placed": "08/01/2023",
       "ponumber": "PO23000107",
       "podescription": "August Tosla Order - E27 Mango",
@@ -81,8 +81,8 @@
           "finalproduct": "323-21130A",
           "sku": "323-21130A",
           "description": "S33+ Full Size",
-          "quantity": "100000",
-          "price": "3.83",
+          "quantity": 100000,
+          "price": 3.83,
           "duedate": "12/01/2023",
           "destination": "Geodis PA",
           "shipmethod": "truck",
@@ -90,7 +90,7 @@
           "status": ""
         }
       ],
-      "id": 4
+      "id": 3
     }
   ],
   "suppliers": [

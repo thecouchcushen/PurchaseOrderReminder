@@ -38,9 +38,10 @@ const PoTrackerContent = (props) => {
     }, [])
 
     //Handle the delete button on each PO
-    //TODO: Implement delete PO capability
     const handleDeletePo = (poIndex) => {
-      console.log("Delete PO with ID", poLines[poIndex].ponumber)
+      polineitems.del(poIndex).then(() => {
+        setPoLines(poLines.filter(po => po.id !== poIndex))
+      })
     }
 
     //Render the PO Tracker Content

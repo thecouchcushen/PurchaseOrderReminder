@@ -36,8 +36,8 @@ const SkuLineForm = (props) => {
             <Flex>
                 <Input placeholder='SKU' name='sku' onChange={handleInputChange} value={lineData.sku} />
                 <Input placeholder='Description' name='description' onChange={handleInputChange} value={lineData.description} />
-                <Input placeholder='Quantity' name='quantity' onChange={handleInputChange} value={lineData.quantity} />
-                <Input placeholder='Price' name='price' onChange={handleInputChange} value={lineData.price} />
+                <Input placeholder='Quantity' name='quantity' type='number' onChange={handleInputChange} value={lineData.quantity} />
+                <Input placeholder='Price' name='price' type='number' onChange={handleInputChange} value={lineData.price} />
                 <Input placeholder='Due/Pickup' name='duedate' onChange={handleInputChange} value={lineData.duedate} />
             </Flex>
             <Flex>
