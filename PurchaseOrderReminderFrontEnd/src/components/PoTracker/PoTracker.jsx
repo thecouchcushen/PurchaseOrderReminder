@@ -49,7 +49,7 @@ const PoTracker = () => {
       </Text>
       <Button onClick={handleAddButton}>{isAddingPo ? 'Cancel' : 'Add PO'}</Button>
 
-      {isAddingPo ? <PoLineItemForm editedData={selectedPo} isEditMode={!!selectedPo} /> : <PoTrackerContent handleEditPo={handleEditPo} />}
+      {isAddingPo ? <PoLineItemForm setIsAddingPo={setIsAddingPo} editedData={selectedPo} isEditMode={!!selectedPo} /> : <PoTrackerContent handleEditPo={handleEditPo} />}
 
     </>
     )

@@ -48,7 +48,7 @@ const PoLineItemForm = (props) => {
     const [formData, setFormData] = useState(initialState)
     const [numberOfSkus, setNumberOfSkus] = useState(1)
 
-    const {editedData, isEditMode} = props
+    const {editedData, isEditMode, setIsAddingPo} = props
 
     //Set the form data to the edited data if in edit mode, otherwise set it to the initial state
     useEffect(() => {
@@ -114,11 +114,13 @@ const PoLineItemForm = (props) => {
         // Handle update logic using formData
         // For example, make an API PUT/PATCH request
         console.log(formData)
+        setIsAddingPo(false)
     } else {
         // Handle new entry logic using formData
         // For example, make an API POST request
         polineitems.create(formData)
         console.log(formData)
+        setIsAddingPo(false)
     }
     }
 
@@ -130,6 +132,7 @@ const PoLineItemForm = (props) => {
     //TODO: Make the form look better
     //TODO: Implement the form submission logic for editing
     //TODO: on submit, the form should go away and the po content should be shown
+    //TODO: Make skus//suppliers a dropdown menu that is populated from the database
     return (
         <>
         <Card>
@@ -156,6 +159,7 @@ const PoLineItemForm = (props) => {
 
 PoLineItemForm.propTypes = {
     isEditMode: PropTypes.bool.isRequired,
+    setIsAddingPo: PropTypes.func.isRequired,
     editedData: PropTypes.shape({
       ponumber: PropTypes.string,
       placed: PropTypes.string,
