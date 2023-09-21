@@ -113,6 +113,7 @@ const PoLineItemForm = (props) => {
     if (isEditMode) {
         // Handle update logic using formData
         // For example, make an API PUT/PATCH request
+        polineitems.update(formData.id, formData)
         console.log(formData)
         setIsAddingPo(false)
     } else {
@@ -130,8 +131,6 @@ const PoLineItemForm = (props) => {
       //make it so that the suppliers/currency/sku/finalsku/destination must be pulled from existing entries in a database
       //Cast quantity and price to numbers
     //TODO: Make the form look better
-    //TODO: Implement the form submission logic for editing
-    //TODO: on submit, the form should go away and the po content should be shown
     //TODO: Make skus//suppliers a dropdown menu that is populated from the database
     return (
         <>
