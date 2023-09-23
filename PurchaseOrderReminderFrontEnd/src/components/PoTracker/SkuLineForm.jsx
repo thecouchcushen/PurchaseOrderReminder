@@ -13,6 +13,7 @@ import {
   } from '@chakra-ui/react'
 //import { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 
 const SkuLineForm = (props) => {
     
@@ -23,6 +24,15 @@ const SkuLineForm = (props) => {
         const {name, value} = e.target
         handleSkuLineInputChange(skuLineIndex, name, value)
     }
+
+    //if the finishedgoods/materaials dropdown is changed, update the finalproduct field (materials should have a final product, finished goods should not, or it should be equal to the SKU that is entered)
+    useEffect(() => {
+        if (lineData.fgmat === 'finishedgoods') {
+            handleSkuLineInputChange(skuLineIndex, 'finalproduct', lineData.sku)
+        }
+    }, [lineData.sku, lineData.fgmat])
+    
+
     //Render the SKU Line Form
     return (
         <>
@@ -31,7 +41,10 @@ const SkuLineForm = (props) => {
                     <option value='finishedgoods'>Finished Good</option>
                     <option value='materials'>Materials</option>
                 </Select>
-                <Input placeholder='Final Product SKU' name='finalproduct' onChange={handleInputChange} value={lineData.finalproduct}/>
+                {
+                (lineData.fgmat === 'materials') ? <Input placeholder='Final Product SKU' name='finalproduct' onChange={handleInputChange} value={lineData.finalproduct}/> : null 
+                }
+                
             </Flex>
             <Flex>
                 <Input placeholder='SKU' name='sku' onChange={handleInputChange} value={lineData.sku} />
