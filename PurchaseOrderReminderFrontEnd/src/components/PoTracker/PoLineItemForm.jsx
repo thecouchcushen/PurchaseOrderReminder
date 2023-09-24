@@ -9,12 +9,13 @@ import {
     Input,
     Button,
     Card,
-    FormControl
+    FormControl,
   } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import SkuLineForm from './SkuLineForm'
 import PropTypes from 'prop-types'
 import polineitems from '../../services/polineitems'
+import PoLineItemFormSupplierDropdown from './PoLineItemFormSupplierDropdown'
 
 const blankLine = {
     
@@ -139,7 +140,8 @@ const PoLineItemForm = (props) => {
                 <Input maxWidth={'50%'} margin={'2'} placeholder='PO' type='text' name='ponumber' value={formData.ponumber} onChange={handleInputChange}/>
                 
                 <Input maxWidth={'50%'} margin={'2'} placeholder='Placed' type='date' name='placed' value={formData.placed} onChange={handleInputChange} />
-                <Input maxWidth={'50%'} margin={'2'} placeholder='Supplier' type='text' name='supplier' value={formData.supplier} onChange={handleInputChange}/>
+                
+                <PoLineItemFormSupplierDropdown name='supplier' value={formData.supplier} onChange={handleInputChange}/>
                 <Input maxWidth={'10%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
                 <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='podescription' value={formData.podescription} onChange={handleInputChange}/>
 
