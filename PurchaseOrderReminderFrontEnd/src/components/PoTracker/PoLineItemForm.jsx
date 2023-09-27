@@ -36,7 +36,7 @@ const blankLine = {
 const initialState = {
     ponumber: '',
     placed: '',
-    supplier: '',
+    supplier: 0,
     currency: '',
     podescription: '',
     lineitems: [
@@ -66,10 +66,19 @@ const PoLineItemForm = (props) => {
     //Handle the input change for the form for each input field
     const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData((prevData) => ({
+    //If the name is supplier, cast the value to an integer and not a string
+    if (name === 'supplier') {
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: parseInt(value),
+        }))
+    } else {
+      setFormData((prevData) => ({
         ...prevData,
         [name]: value,
     }))
+    }
+    
     }
     //Handle the add SKU line button which adds another sku line
     const handleAddSkuLine = () => {
@@ -133,6 +142,7 @@ const PoLineItemForm = (props) => {
       //Cast quantity and price to numbers
     //TODO: Make the form look better
     //TODO: Make skus//suppliers a dropdown menu that is populated from the database
+    //TODO: make sure that the Supplier being submitted is an integer, not a string
     return (
         <>
         <Card>
@@ -164,7 +174,7 @@ PoLineItemForm.propTypes = {
     editedData: PropTypes.shape({
       ponumber: PropTypes.string,
       placed: PropTypes.string,
-      supplier: PropTypes.string,
+      supplier: PropTypes.number,
       currency: PropTypes.string,
       description: PropTypes.string,
       lineitems: PropTypes.arrayOf(
