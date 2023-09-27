@@ -5,7 +5,7 @@
       "placed": "08/01/2023",
       "ponumber": "PO22000188",
       "podescription": "Recycling Envelope Secondary Reorder",
-      "supplier": "Grounded Packaging",
+      "supplier": 2,
       "currency": "USD",
       "lineitems": [
         {
@@ -28,7 +28,7 @@
       "placed": "07/15/2023",
       "ponumber": "PO23000064",
       "podescription": "L30 Product Card First Order New Size",
-      "supplier": "Skillful Printing",
+      "supplier": 3,
       "currency": "USD",
       "lineitems": [
         {
@@ -51,7 +51,7 @@
       "placed": "08/01/2023",
       "ponumber": "PO23000107",
       "podescription": "August Tosla Order - E27 Mango",
-      "supplier": "Tosla d.o.o.",
+      "supplier": 1,
       "currency": "EUR",
       "lineitems": [
         {
@@ -72,7 +72,7 @@
     {
       "ponumber": "PO230001XX",
       "placed": "2023-09-13",
-      "supplier": "Capsum",
+      "supplier": 5,
       "currency": "USD",
       "podescription": "S33+ Reorder",
       "lineitems": [
@@ -118,6 +118,13 @@
     {
       "id": 4,
       "name": "CCG",
+      "deposit": 0,
+      "balance": 1,
+      "daysafterpickup": 30
+    },
+    {
+      "id": 5,
+      "name": "Capsum",
       "deposit": 0,
       "balance": 1,
       "daysafterpickup": 30

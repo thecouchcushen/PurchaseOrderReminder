@@ -8,6 +8,7 @@
 
 import { useEffect, useState } from "react"
 import PoSkuLine from "./PoSkuLine"
+import PoLineSupplier from "./PoLineSupplier"
 import {
     Tr,
     Td,
@@ -38,6 +39,7 @@ const PoLine = (props) => {
             totalPoValueAccumulator += line.price*line.quantity
         })
         setPoValue(totalPoValueAccumulator)
+        console.log(typeof(poToDisplay.supplier))
     }, [poToDisplay.lineitems])
     
     const onClickEdit = () => {
@@ -55,7 +57,7 @@ const PoLine = (props) => {
                     <Tr>
                         <Td>{poToDisplay.placed}</Td>
                         <Td>{poToDisplay.ponumber}</Td>
-                        <Td>{poToDisplay.supplier}</Td>
+                        <PoLineSupplier supplierId={poToDisplay.supplier} />
                         <Td>{poToDisplay.podescription}</Td>
                         <Td>{poValue}</Td>  
                         <Td>{poToDisplay.currency}</Td>  
@@ -102,7 +104,7 @@ PoLine.propTypes = {
         id: PropTypes.number,
         ponumber: PropTypes.string,
         placed: PropTypes.string,
-        supplier: PropTypes.string,
+        supplier: PropTypes.number,
         currency: PropTypes.string,
         podescription: PropTypes.string,
         lineitems: PropTypes.arrayOf(
