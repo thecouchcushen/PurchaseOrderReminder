@@ -23,7 +23,7 @@ const SkuLineForm = (props) => {
     // Handle input changes from the handler passed to the form from the parent component (PoLineItemForm)
     const handleInputChange = (e) => {
         const {name, value} = e.target
-        if (name === 'sku') {
+        if (name === 'sku' || name === 'quantity' || name === 'price' || name === 'finalproduct') {
             handleSkuLineInputChange(skuLineIndex, name, parseInt(value))
         } else {
             handleSkuLineInputChange(skuLineIndex, name, value)
@@ -48,7 +48,7 @@ const SkuLineForm = (props) => {
                     <option value='materials'>Materials</option>
                 </Select>
                 {
-                (lineData.fgmat === 'materials') ? <Input placeholder='Final Product SKU' name='finalproduct' onChange={handleInputChange} value={lineData.finalproduct}/> : null 
+                (lineData.fgmat === 'materials') ? <SkuLineFormSkuDropdown name='finalproduct' value={lineData.finalproduct} onChange={handleInputChange} /> : null
                 }
                 
             </Flex>
@@ -88,7 +88,7 @@ SkuLineForm.propTypes = {
     skuLineIndex: PropTypes.number,
     lineData: PropTypes.shape({
       fgmat: PropTypes.string,
-      finalproduct: PropTypes.string,
+      finalproduct: PropTypes.number,
       sku: PropTypes.number,
       description: PropTypes.string,
       quantity: PropTypes.number,

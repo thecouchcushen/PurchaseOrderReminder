@@ -20,7 +20,7 @@ import PoLineItemFormSupplierDropdown from './PoLineItemFormSupplierDropdown'
 const blankLine = {
     
     fgmat: '',
-    finalproduct: '',
+    finalproduct: 1,
     sku: 1,
     description: '',
     quantity: 0,
@@ -180,7 +180,7 @@ PoLineItemForm.propTypes = {
       lineitems: PropTypes.arrayOf(
         PropTypes.shape({
           fgmat: PropTypes.string,
-          finalproduct: PropTypes.string,
+          finalproduct: PropTypes.number,
           sku: PropTypes.number,
           description: PropTypes.string,
           quantity: PropTypes.number,

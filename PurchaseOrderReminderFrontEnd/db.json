@@ -10,7 +10,7 @@
       "lineitems": [
         {
           "fgmat": "materials",
-          "finalproduct": "323-2-3",
+          "finalproduct": 2,
           "sku": 1,
           "description": "Envelope for Recycling without Deco",
           "quantity": 180000,
@@ -33,7 +33,7 @@
       "lineitems": [
         {
           "fgmat": "finishedgood",
-          "finalproduct": "323-4-61",
+          "finalproduct": 4,
           "sku": 4,
           "description": "L30 Biotin Gummies Product Cards",
           "quantity": 30000,
@@ -56,7 +56,7 @@
       "lineitems": [
         {
           "fgmat": "finishedgood",
-          "finalproduct": "323-63450",
+          "finalproduct": 3,
           "sku": 3,
           "description": "E27 Liquid Collagen - Mango",
           "quantity": 600000,
@@ -78,7 +78,7 @@
       "lineitems": [
         {
           "fgmat": "finishedgood",
-          "finalproduct": "323-21130A",
+          "finalproduct": 5,
           "sku": 5,
           "description": "S33+ Full Size",
           "quantity": 100000,
