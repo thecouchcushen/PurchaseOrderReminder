@@ -9,13 +9,15 @@ import {
     Tr,
     Td,
 } from '@chakra-ui/react'
+import PoSkuLineSku from './PoSkuLineSku'
+
 
 const PoSkuLine = (propsObject) => {
     const skuToDisplay = propsObject.skuLine
     //Render the SKU Line
     return (
         <Tr>
-            <Td>{skuToDisplay.sku}</Td>
+            <PoSkuLineSku skuId={skuToDisplay.sku} />
             <Td>{skuToDisplay.quantity}</Td>
             <Td>{skuToDisplay.price}</Td>
             <Td>{skuToDisplay.duedate}</Td>

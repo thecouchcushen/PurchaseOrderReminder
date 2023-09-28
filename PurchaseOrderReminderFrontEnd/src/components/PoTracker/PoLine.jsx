@@ -111,7 +111,7 @@ PoLine.propTypes = {
             PropTypes.shape({
                 fgmat: PropTypes.string,
                 finalproduct: PropTypes.string,
-                sku: PropTypes.string,
+                sku: PropTypes.number,
                 description: PropTypes.string,
                 quantity: PropTypes.number,
                 price: PropTypes.number,

@@ -11,7 +11,7 @@
         {
           "fgmat": "materials",
           "finalproduct": "323-2-3",
-          "sku": "323-2-3P",
+          "sku": 1,
           "description": "Envelope for Recycling without Deco",
           "quantity": 180000,
           "price": 0.188,
@@ -34,7 +34,7 @@
         {
           "fgmat": "finishedgood",
           "finalproduct": "323-4-61",
-          "sku": "323-4-61",
+          "sku": 4,
           "description": "L30 Biotin Gummies Product Cards",
           "quantity": 30000,
           "price": 0.03,
@@ -57,7 +57,7 @@
         {
           "fgmat": "finishedgood",
           "finalproduct": "323-63450",
-          "sku": "323-63450",
+          "sku": 3,
           "description": "E27 Liquid Collagen - Mango",
           "quantity": 600000,
           "price": 6.1,
@@ -77,9 +77,9 @@
       "podescription": "S33+ Reorder",
       "lineitems": [
         {
-          "fgmat": "",
+          "fgmat": "finishedgood",
           "finalproduct": "323-21130A",
-          "sku": "323-21130A",
+          "sku": 5,
           "description": "S33+ Full Size",
           "quantity": 100000,
           "price": 3.83,
@@ -161,6 +161,13 @@
       "id": 4,
       "sku": "323-4-61",
       "name": "L30 Biotin Gummies Product Cards",
+      "unit": "ea",
+      "bom": []
+    },
+    {
+      "id": 5,
+      "sku": "323-21130A",
+      "name": "S33+ Full Size",
       "unit": "ea",
       "bom": []
     }

@@ -14,6 +14,7 @@ import {
 //import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
+import SkuLineFormSkuDropdown from './SkuLineFormSkuDropdown'
 
 const SkuLineForm = (props) => {
     
@@ -22,7 +23,12 @@ const SkuLineForm = (props) => {
     // Handle input changes from the handler passed to the form from the parent component (PoLineItemForm)
     const handleInputChange = (e) => {
         const {name, value} = e.target
-        handleSkuLineInputChange(skuLineIndex, name, value)
+        if (name === 'sku') {
+            handleSkuLineInputChange(skuLineIndex, name, parseInt(value))
+        } else {
+            handleSkuLineInputChange(skuLineIndex, name, value)
+        }
+        
     }
 
     //if the finishedgoods/materaials dropdown is changed, update the finalproduct field (materials should have a final product, finished goods should not, or it should be equal to the SKU that is entered)
@@ -47,8 +53,7 @@ const SkuLineForm = (props) => {
                 
             </Flex>
             <Flex>
-                <Input placeholder='SKU' name='sku' onChange={handleInputChange} value={lineData.sku} />
-                <Input placeholder='Description' name='description' onChange={handleInputChange} value={lineData.description} />
+                <SkuLineFormSkuDropdown name='sku' value={lineData.sku} onChange={handleInputChange} />
                 <Input placeholder='Quantity' name='quantity' type='number' onChange={handleInputChange} value={lineData.quantity} />
                 <Input placeholder='Price' name='price' type='number' onChange={handleInputChange} value={lineData.price} />
                 <Input placeholder='Due/Pickup' name='duedate' onChange={handleInputChange} value={lineData.duedate} />
@@ -84,7 +89,7 @@ SkuLineForm.propTypes = {
     lineData: PropTypes.shape({
       fgmat: PropTypes.string,
       finalproduct: PropTypes.string,
-      sku: PropTypes.string,
+      sku: PropTypes.number,
       description: PropTypes.string,
       quantity: PropTypes.number,
       price: PropTypes.number,
