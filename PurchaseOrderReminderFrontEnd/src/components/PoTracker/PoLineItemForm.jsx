@@ -21,7 +21,7 @@ const blankLine = {
     
     fgmat: '',
     finalproduct: '',
-    sku: '',
+    sku: 1,
     description: '',
     quantity: 0,
     price: 0,
@@ -36,7 +36,7 @@ const blankLine = {
 const initialState = {
     ponumber: '',
     placed: '',
-    supplier: 0,
+    supplier: 1,
     currency: '',
     podescription: '',
     lineitems: [
@@ -181,7 +181,7 @@ PoLineItemForm.propTypes = {
         PropTypes.shape({
           fgmat: PropTypes.string,
           finalproduct: PropTypes.string,
-          sku: PropTypes.string,
+          sku: PropTypes.number,
           description: PropTypes.string,
           quantity: PropTypes.number,
           price: PropTypes.number,
