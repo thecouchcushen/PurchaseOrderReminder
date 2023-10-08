@@ -48,6 +48,7 @@ const PoLineItemForm = (props) => {
     //initialize state variables
     const [formData, setFormData] = useState(initialState)
     const [numberOfSkus, setNumberOfSkus] = useState(1)
+    const [formErrors, setFormErrors] = useState({})
 
     const {editedData, isEditMode, setIsAddingPo} = props
 
@@ -63,6 +64,58 @@ const PoLineItemForm = (props) => {
         }
     }, [isEditMode, editedData])
 
+    //Check if the PO Number is unique
+    const checkUniqueNessOfPoNumber = async (poNumber) => {
+
+      const initialPoLineItems = await polineitems.getAll()
+      const poNumbers = initialPoLineItems.map(poLineItem => poLineItem.ponumber)
+  
+      return !poNumbers.includes(poNumber)
+
+    }
+
+    //Validate the fields of the form
+    const validateFields = async (fieldName, value) => {
+      const errors = { ...formErrors }
+
+      switch (fieldName) {
+        case 'placed':
+          if (/(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/((19|20)\d\d)/.test(value)) {
+            errors[fieldName] = 'PO Placement Date must be in the format MM/DD/YYYY'
+          } else {
+            delete errors[fieldName]
+          }
+          break
+        case 'currency':
+            if (typeof(value) !== "string" || value.length !== 3) {
+              errors[fieldName] = 'Currency must be 3 characters for the ISO 4217 currency code'
+            } else {
+              delete errors[fieldName]
+            }
+            break
+        case 'podescription':
+          if (typeof(value) !== "string") {
+            errors[fieldName] = 'PO Description must be a string'
+          } else {
+            delete errors[fieldName]
+          }
+          break
+        case 'ponumber':
+          if (typeof(value) !== "string" || (await checkUniqueNessOfPoNumber(value) === false && isEditMode === false) || (isEditMode === true && value !== editedData.ponumber)) {
+            errors[fieldName] = 'PO Number must be a unique string'
+          } else {
+            delete errors[fieldName]
+          }
+          break
+
+
+        default:
+          break
+      }
+
+      setFormErrors(errors)
+    }
+
     //Handle the input change for the form for each input field
     const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -77,6 +130,7 @@ const PoLineItemForm = (props) => {
         ...prevData,
         [name]: value,
     }))
+    validateFields(name, value)
     }
     
     }
@@ -118,21 +172,28 @@ const PoLineItemForm = (props) => {
 
     const handleSubmit = () => {
     //e.preventDefault()
-    
-    // Handle form submission logic
-    if (isEditMode) {
+    console.log(formErrors)
+    if (Object.keys(formErrors).length > 0) {
+      console.log(formErrors)
+      return;
+
+    } else {
+      if (isEditMode) {
         // Handle update logic using formData
         // For example, make an API PUT/PATCH request
         polineitems.update(formData.id, formData)
         console.log(formData)
         setIsAddingPo(false)
-    } else {
+      } else {
         // Handle new entry logic using formData
         // For example, make an API POST request
         polineitems.create(formData)
         console.log(formData)
         setIsAddingPo(false)
     }
+    }
+    // Handle form submission logic
+    
     }
 
     //Render the Purchase Order Form
@@ -141,8 +202,6 @@ const PoLineItemForm = (props) => {
       //make it so that the suppliers/currency/sku/finalsku/destination must be pulled from existing entries in a database
       //Cast quantity and price to numbers
     //TODO: Make the form look better
-    //TODO: Make skus//suppliers a dropdown menu that is populated from the database
-    //TODO: make sure that the Supplier being submitted is an integer, not a string
     return (
         <>
         <Card>

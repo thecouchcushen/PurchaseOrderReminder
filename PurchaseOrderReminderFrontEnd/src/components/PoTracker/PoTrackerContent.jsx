@@ -16,7 +16,7 @@ import {
     TableContainer,
     Center,
     Accordion,
-    
+    Button
 } from '@chakra-ui/react'
 //import axios from 'axios'
 import { useEffect } from 'react'
@@ -24,6 +24,7 @@ import { useState } from 'react'
 import PoLine from './PoLine'
 import PropTypes from 'prop-types'
 import polineitems from '../../services/polineitems'
+import PoLineItemFormSupplierDropdown from './PoLineItemFormSupplierDropdown'
 
 const PoTrackerContent = (props) => {
     //Initialize state variables
@@ -39,7 +40,7 @@ const PoTrackerContent = (props) => {
       maxCost: Infinity, // You can set this to a reasonable upper limit
     })
     const [descriptionFilter, setDescriptionFilter] = useState('')
-    const [supplierFilter, setSupplierFilter] = useState('')
+    const [supplierFilter, setSupplierFilter] = useState(0)
     const [currencyFilter, setCurrencyFilter] = useState('')
     const [poNumberFilter, setPoNumberFilter] = useState('')
     
@@ -50,7 +51,7 @@ const PoTrackerContent = (props) => {
     }
     
     const handleSupplierFilterChange = (e) => {
-      setSupplierFilter(e.target.value)
+      setSupplierFilter(parseInt(e.target.value))
     }
     
     const handleCurrencyFilterChange = (e) => {
@@ -143,7 +144,7 @@ const PoTrackerContent = (props) => {
       }
 
       // Check if the supplier contains the filter text (case-insensitive)
-      if (supplierFilter && !po.supplier.toLowerCase().includes(supplierFilter.toLowerCase())) {
+      if (supplierFilter > 0 && po.supplier !== supplierFilter) {
         return false // Filter out items that don't match the supplier filter
       }
 
@@ -202,7 +203,15 @@ const PoTrackerContent = (props) => {
                 <Td><Input placeholder='End Date' name='endDate' value={placementDateRange.endDate} onChange={handlePlacementDateFilterChange} ></Input></Td>
                 <Td><Input placeholder='PO Filter' name='ponumber' value={poNumberFilter} onChange={handlePoNumberFilterChange}></Input></Td>
                 <Td><Input placeholder='Description Filter' name='description' value={descriptionFilter} onChange={handleDescriptionFilterChange}></Input></Td>
-                <Td><Input placeholder='Supplier Filter' name='supplier' value={supplierFilter} onChange={handleSupplierFilterChange}></Input></Td>
+                <Td>
+                  {
+                  //<Input placeholder='Supplier Filter' name='supplier' value={supplierFilter} onChange={handleSupplierFilterChange}></Input>
+                  }
+                  {//TODO: Make this a React select dropdown so you can TYPE the supplier and then select
+                  }
+                  <PoLineItemFormSupplierDropdown name='supplier' value={supplierFilter} onChange={handleSupplierFilterChange} />
+                  <Button onClick={() => setSupplierFilter(0)}>Clear</Button>
+                  </Td>
                 <Td><Input placeholder='Minimum Cost' name='minCost' value={totalCostRange.minCost} type='number' onFocus={handleFocus} onChange={handleTotalCostFilterChange}></Input></Td>
                 <Td><Input placeholder='Maximum Cost' name='maxCost' value={totalCostRange.maxCost} type='number' onChange={handleTotalCostFilterChange}></Input></Td>
                 <Td><Input placeholder='Currency Filter' name='currency' value={currencyFilter} onChange={handleCurrencyFilterChange}></Input></Td>
