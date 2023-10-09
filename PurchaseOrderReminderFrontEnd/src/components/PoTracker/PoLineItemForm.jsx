@@ -49,6 +49,7 @@ const PoLineItemForm = (props) => {
     const [formData, setFormData] = useState(initialState)
     const [numberOfSkus, setNumberOfSkus] = useState(1)
     const [formErrors, setFormErrors] = useState({})
+    const [skuErrors, setSkuErrors] = useState({})
 
     const {editedData, isEditMode, setIsAddingPo} = props
 
@@ -63,6 +64,14 @@ const PoLineItemForm = (props) => {
             setNumberOfSkus(initialState.lineitems.length)
         }
     }, [isEditMode, editedData])
+
+    //Update the SKU line errors
+    const updateSkuLineErrors = (index, errors) => {
+      setSkuErrors((prevErrors) => ({
+        ...prevErrors,
+        [index]: errors, // Store errors for the SKU line at the specified index
+      }))
+    }
 
     //Check if the PO Number is unique
     const checkUniqueNessOfPoNumber = async (poNumber) => {
@@ -173,6 +182,7 @@ const PoLineItemForm = (props) => {
     const handleSubmit = () => {
     //e.preventDefault()
     console.log(formErrors)
+    console.log(skuErrors)
     if (Object.keys(formErrors).length > 0) {
       console.log(formErrors)
       return;
@@ -216,7 +226,7 @@ const PoLineItemForm = (props) => {
 
                 <Button maxWidth={'30%'} margin={5} onClick={handleAddSkuLine}>Add SKU Line</Button>
 
-                {formData.lineitems.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} />
+                {formData.lineitems.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} updateSkuLineErrors={updateSkuLineErrors} />
                 )}
                 
                 <Button maxWidth={'30%'} margin={5} type='submit' onClick={handleSubmit}>{isEditMode ? "Update" : "Create"}</Button>
