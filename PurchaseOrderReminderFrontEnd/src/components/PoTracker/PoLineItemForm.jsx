@@ -183,9 +183,9 @@ const PoLineItemForm = (props) => {
     //e.preventDefault()
     console.log(formErrors)
     console.log(skuErrors)
-    if (Object.keys(formErrors).length > 0) {
+    if (Object.keys(formErrors).length > 0 || Object.values(skuErrors).some((errors) => Object.keys(errors).length > 0)) {
       console.log(formErrors)
-      return;
+      return
 
     } else {
       if (isEditMode) {
