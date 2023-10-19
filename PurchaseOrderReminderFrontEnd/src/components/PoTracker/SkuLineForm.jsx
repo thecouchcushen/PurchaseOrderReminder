@@ -7,9 +7,14 @@
 
 import { 
     Input,
-    Flex,
     Select,
-    Button
+    Button,
+    Box,
+    Wrap,
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    WrapItem
   } from '@chakra-ui/react'
 //import { useEffect } from 'react'
 import PropTypes from 'prop-types'
@@ -75,13 +80,13 @@ const SkuLineForm = (props) => {
         updateSkuLineErrors(skuLineIndex, errors)
     }
 
-    // Handle input changes from the handler passed to the form from the parent component (PoLineItemForm)
+        // Handle input changes from the handler passed to the form from the parent component (PoLineItemForm)
     const handleInputChange = (e) => {
         const {name, value} = e.target
         if (name === 'sku' || name === 'quantity' || name === 'price' || name === 'finalproduct') {
             handleSkuLineInputChange(skuLineIndex, name, parseInt(value))
             validateSkuFields(name, parseInt(value))
-        } else {
+                } else {
             handleSkuLineInputChange(skuLineIndex, name, value)
             validateSkuFields(name, value)
         }
@@ -97,44 +102,110 @@ const SkuLineForm = (props) => {
 
     //Render the SKU Line Form
     return (
-        <>
-        <Flex>
-                <Select name='fgmat' value={lineData.fgmat} onChange={handleInputChange}>
-                    <option value='finishedgoods'>Finished Good</option>
-                    <option value='materials'>Materials</option>
-                </Select>
+        <Box p={4}>
+            <Wrap spacing={4} justify="space-between">
+            <WrapItem flexBasis="calc(50% - 1rem)">
+                <FormControl>
+                    <FormLabel>Finished Good or Material?</FormLabel>
+                    <Select name='fgmat' value={lineData.fgmat} onChange={handleInputChange}>
+                        <option value='finishedgoods'>Finished Good</option>
+                        <option value='materials'>Materials</option>
+                    </Select>
+                </FormControl>
+            </WrapItem>
                 {
-                (lineData.fgmat === 'materials') ? <SkuLineFormSkuDropdown name='finalproduct' value={lineData.finalproduct} onChange={handleInputChange} /> : null
-                }
+                (lineData.fgmat === 'materials') ? (
+                <WrapItem flexBasis="calc(50% - 1rem)">
+                    <FormControl >
+                        <FormLabel>Final Product SKU</FormLabel>
+                        <SkuLineFormSkuDropdown name='finalproduct' value={lineData.finalproduct} onChange={handleInputChange} />
+                    </FormControl> 
+                </WrapItem>
+                ) : (
+                <WrapItem flexBasis="calc(50% - 1rem)">
+                    <Box></Box>
+                </WrapItem>
+                )
                 
-            </Flex>
-            <Flex>
-                <SkuLineFormSkuDropdown name='sku' value={lineData.sku} onChange={handleInputChange} />
-                <Input placeholder='Quantity' name='quantity' type='number' onChange={handleInputChange} value={lineData.quantity} />
-                <Input placeholder='Price' name='price' type='number' onChange={handleInputChange} value={lineData.price} />
-                <Input placeholder='Due/Pickup' type='date' name='duedate' onChange={handleInputChange} value={lineData.duedate} />
-            </Flex>
-            <Flex>
-                <Input placeholder='Destination' name='destination' onChange={handleInputChange} value={lineData.destination} />
-                <Select name='shipmethod' value={lineData.shipmethod} onChange={handleInputChange}>
-                    <option value='sea'>Sea</option>
-                    <option value='air'>Air</option>
-                    <option value='courier'>Courier</option>
-                    <option value='truck'>Truck</option>
-                </Select>
-                <Input placeholder='Arrival Date' type='date' name='arrivaldate' onChange={handleInputChange} value={lineData.arrivaldate} />
-                <Select name='status' value={lineData.status} onChange={handleInputChange}>
-                    <option value='placed'>Placed</option>
-                    <option value='reviewing'>Reviewing</option>
-                    <option value='needsapproval'>Needs Approval</option>
-                    <option value='cancelled'>Cancelled</option>
-                    <option value='complete'>Complete</option>
-                    <option value='enroute'>En Route</option>
-                    <option value='delivered'>Delivered</option>
-                </Select>
-            </Flex>
-            <Button onClick={deleteFunction}>Delete</Button>
-            </>
+                }
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+                <FormControl >
+                    <FormLabel>SKU</FormLabel>
+                    <SkuLineFormSkuDropdown name='sku' value={lineData.sku} onChange={handleInputChange} />
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl  isInvalid={!!skuErrors.quantity}>
+                    <FormLabel>Quantity</FormLabel>
+                    <Input placeholder='Quantity' name='quantity' type='number' onChange={handleInputChange} value={lineData.quantity} />
+                    <FormErrorMessage>{skuErrors.quantity}</FormErrorMessage>
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl  isInvalid={!!skuErrors.price}>
+                    <FormLabel>Price</FormLabel>
+                    <Input placeholder='Price' name='price' type='number' onChange={handleInputChange} value={lineData.price} />
+                    <FormErrorMessage>{skuErrors.price}</FormErrorMessage>
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl  isInvalid={!!skuErrors.duedate}>
+                    <FormLabel>SKU Due Date</FormLabel>
+                    <Input placeholder='MM/DD/YYYY' name='duedate' onChange={handleInputChange} value={lineData.duedate} />
+                    <FormErrorMessage>{skuErrors.duedate}</FormErrorMessage>
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl  isInvalid={!!skuErrors.destination}>
+                    <FormLabel>Destination</FormLabel>
+                    <Input placeholder='Destination' name='destination' onChange={handleInputChange} value={lineData.destination} />
+                    <FormErrorMessage>{skuErrors.destination}</FormErrorMessage>
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl >
+                    <FormLabel>Shipping Method</FormLabel>
+                    <Select name='shipmethod' value={lineData.shipmethod} onChange={handleInputChange}>
+                        <option value='sea'>Sea</option>
+                        <option value='air'>Air</option>
+                        <option value='courier'>Courier</option>
+                        <option value='truck'>Truck</option>
+                    </Select>
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl  isInvalid={!!skuErrors.arrivaldate}>
+                    <FormLabel>Arrival Date</FormLabel>
+                    <Input placeholder='MM/DD/YYYY' name='arrivaldate' onChange={handleInputChange} value={lineData.arrivaldate} />
+                    <FormErrorMessage>{skuErrors.arrivaldate}</FormErrorMessage>
+                </FormControl>
+                </WrapItem>
+                <WrapItem flexBasis="calc(33.33% - 1rem)">
+
+                <FormControl>
+                    <FormLabel>Status</FormLabel>
+                    <Select name='status' value={lineData.status} onChange={handleInputChange}>
+                        <option value='placed'>Placed</option>
+                        <option value='reviewing'>Reviewing</option>
+                        <option value='needsapproval'>Needs Approval</option>
+                        <option value='cancelled'>Cancelled</option>
+                        <option value='complete'>Complete</option>
+                        <option value='enroute'>En Route</option>
+                        <option value='delivered'>Delivered</option>
+                    </Select>
+                </FormControl>
+                </WrapItem>
+            <WrapItem flexBasis="calc(33% - 1rem)">
+                <Button width={"100%"} colorScheme="red" onClick={deleteFunction}>Delete</Button>
+            </WrapItem>
+            </Wrap>
+        </Box>
     )
 
 }
