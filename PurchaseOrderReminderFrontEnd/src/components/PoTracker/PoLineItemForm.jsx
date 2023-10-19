@@ -8,8 +8,12 @@
 import { 
     Input,
     Button,
-    Card,
     FormControl,
+    Box,
+    FormErrorMessage,
+    FormLabel,
+    Wrap,
+    WrapItem
   } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import SkuLineForm from './SkuLineForm'
@@ -89,7 +93,7 @@ const PoLineItemForm = (props) => {
 
       switch (fieldName) {
         case 'placed':
-          if (/(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/((19|20)\d\d)/.test(value)) {
+          if (value !== '' && !/(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/((19|20)\d\d)/.test(value)) {
             errors[fieldName] = 'PO Placement Date must be in the format MM/DD/YYYY'
           } else {
             delete errors[fieldName]
@@ -213,27 +217,53 @@ const PoLineItemForm = (props) => {
       //Cast quantity and price to numbers
     //TODO: Make the form look better
     return (
-        <>
-        <Card>
-            <FormControl>
-                <Input maxWidth={'50%'} margin={'2'} placeholder='PO' type='text' name='ponumber' value={formData.ponumber} onChange={handleInputChange}/>
-                
-                <Input maxWidth={'50%'} margin={'2'} placeholder='Placed' type='date' name='placed' value={formData.placed} onChange={handleInputChange} />
-                
+        <Box p={4}>
+          <Wrap spacing={4} justify="space-between">
+            <WrapItem flexBasis="calc(50% - 1rem)">
+              <FormControl isInvalid={!!formErrors.ponumber}>
+                <FormLabel>PO Number</FormLabel>
+                <Input maxWidth={'100%'} margin={'2'} placeholder='PO' type='text' name='ponumber' value={formData.ponumber} onChange={handleInputChange}/>
+                <FormErrorMessage>{formErrors.ponumber}</FormErrorMessage>
+              </FormControl>
+            </WrapItem>
+            <WrapItem flexBasis="calc(50% - 1rem)">
+              <FormControl isInvalid={!!formErrors.placed}>
+                <FormLabel>PO Placement Date</FormLabel>
+                <Input maxWidth={'100%'} margin={'2'} placeholder='MM/DD/YYYY'  name='placed' value={formData.placed} onChange={handleInputChange} />
+                <FormErrorMessage>{formErrors.placed}</FormErrorMessage>
+              </FormControl>
+            </WrapItem>
+            <WrapItem flexBasis="calc(30% - 1rem)">
+              <FormControl isInvalid={!!formErrors.supplier}>
+                <FormLabel>Supplier</FormLabel>
                 <PoLineItemFormSupplierDropdown name='supplier' value={formData.supplier} onChange={handleInputChange}/>
-                <Input maxWidth={'10%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
-                <Input maxWidth={'50%'} margin={'2'} placeholder='Description' type='text' name='podescription' value={formData.podescription} onChange={handleInputChange}/>
-
-                <Button maxWidth={'30%'} margin={5} onClick={handleAddSkuLine}>Add SKU Line</Button>
-
-                {formData.lineitems.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} updateSkuLineErrors={updateSkuLineErrors} />
-                )}
-                
-                <Button maxWidth={'30%'} margin={5} type='submit' onClick={handleSubmit}>{isEditMode ? "Update" : "Create"}</Button>
-            
+                <FormErrorMessage>{formErrors.supplier}</FormErrorMessage>
+              </FormControl>
+            </WrapItem>
+            <WrapItem flexBasis="calc(20% - 1rem)">
+              <FormControl isInvalid={!!formErrors.currency}>
+                <FormLabel>Currency</FormLabel>
+                <Input maxWidth={'100%'} margin={'2'} placeholder='Currency' type='text' name='currency' value={formData.currency} onChange={handleInputChange} />
+                <FormErrorMessage>{formErrors.currency}</FormErrorMessage>
+              </FormControl>
+            </WrapItem>
+            <WrapItem flexBasis="calc(50% - 1rem)">
+            <FormControl isInvalid={!!formErrors.podescription}>
+              <FormLabel>PO Description</FormLabel>
+              <Input maxWidth={'100%'} margin={'2'} placeholder='Description' type='text' name='podescription' value={formData.podescription} onChange={handleInputChange}/>
+              <FormErrorMessage>{formErrors.podescription}</FormErrorMessage>
             </FormControl>
-        </Card>
-        </>    
+            </WrapItem>
+            
+            <Box>
+              {formData.lineitems.map((lineData, i) => <SkuLineForm key={'SkuLine' + i} skuLineIndex={i} lineData={lineData} setFormData={setFormData} handleSkuLineInputChange={handleSkuLineInputChange} deleteFunction={() => handleSkuLineDelete(i)} updateSkuLineErrors={updateSkuLineErrors} />
+              )}
+            </Box>
+            <Button maxWidth={'30%'} margin={5} colorScheme='teal' onClick={handleAddSkuLine}>Add SKU Line</Button>
+            <Button maxWidth={'30%'} margin={5} colorScheme='teal' type='submit' onClick={handleSubmit}>{isEditMode ? "Update" : "Create"}</Button>
+            
+          </Wrap>
+        </Box>
     )
 }
 
